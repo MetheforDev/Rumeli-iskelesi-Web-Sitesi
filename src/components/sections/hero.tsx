@@ -1,18 +1,179 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { WeatherWidget } from "@/components/ui/weather-widget";
 import { useTranslations } from "next-intl";
+
+// Yeni görseller eklenince buraya ekleyin (public/images/hero/ altına koyun)
+const HERO_IMAGES = [
+  { src: "/images/hero/rumeli-cam.jpg", alt: "Rumeli İskelesi" },
+  // { src: "/images/hero/rumeli-deniz.jpg", alt: "Deniz Manzarası" },
+  // { src: "/images/hero/rumeli-ic.jpg", alt: "İç Mekan" },
+  // { src: "/images/hero/rumeli-yemek.jpg", alt: "Lezzetler" },
+  // { src: "/images/hero/rumeli-gece.jpg", alt: "Gece Manzarası" },
+];
+
+const SLIDE_MS = 5500;
+
+function MobilePromoPill() {
+  const t = useTranslations("hero");
+  return (
+    <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-brand-500/30 bg-black/50 backdrop-blur-md shadow-lg">
+      <div className="flex items-center justify-center w-7 h-7 rounded-full bg-brand-600/30 border border-brand-500/30 shrink-0">
+        <span className="text-sm">☕</span>
+      </div>
+      <div className="flex items-center gap-2 text-sm">
+        <span className="text-white font-medium">{t("promo_title")}</span>
+        <span className="w-px h-3 bg-white/20" />
+        <span
+          className="font-black"
+          style={{
+            background: "linear-gradient(135deg, #d9892a, #f4c56a)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          {t("promo_price")}
+        </span>
+      </div>
+      <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-600/20 border border-brand-500/20">
+        <span className="w-1 h-1 rounded-full bg-brand-400 animate-pulse" />
+        <span className="text-brand-300 text-[10px] font-medium">{t("promo_badge")}</span>
+      </div>
+    </div>
+  );
+}
+
+function DesktopPromoCard() {
+  const t = useTranslations("hero");
+  return (
+    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/55 backdrop-blur-xl shadow-2xl w-48">
+      {/* Image placeholder — icelike gradient */}
+      <div className="relative h-28 overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(145deg, #0a1628 0%, #0d2035 50%, #0a1a10 100%)",
+          }}
+        />
+        {/* Frost shimmer */}
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{
+            background: "radial-gradient(ellipse at 30% 40%, rgba(100,180,255,0.25) 0%, transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(200,230,255,0.15) 0%, transparent 50%)",
+          }}
+        />
+        {/* Glass illustration */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative">
+            {/* Outer glass */}
+            <div
+              className="w-14 h-20 relative"
+              style={{
+                border: "1.5px solid rgba(255,255,255,0.15)",
+                borderRadius: "2px 2px 6px 6px",
+                background: "linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(100,150,200,0.12))",
+              }}
+            >
+              {/* Coffee liquid */}
+              <div
+                className="absolute bottom-0 inset-x-0 h-3/4 rounded-b-md"
+                style={{
+                  background: "linear-gradient(to bottom, rgba(120,70,20,0.55), rgba(60,30,5,0.75))",
+                }}
+              />
+              {/* Foam */}
+              <div
+                className="absolute top-5 inset-x-1 h-2 rounded-sm opacity-70"
+                style={{ background: "linear-gradient(to right, rgba(200,150,80,0.5), rgba(240,200,120,0.4))" }}
+              />
+              {/* Ice cube 1 */}
+              <div
+                className="absolute top-2 left-1.5 w-3.5 h-3.5 rotate-12"
+                style={{
+                  background: "rgba(200,230,255,0.25)",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                  borderRadius: "2px",
+                }}
+              />
+              {/* Ice cube 2 */}
+              <div
+                className="absolute top-3 right-1 w-3 h-3 -rotate-6"
+                style={{
+                  background: "rgba(180,220,255,0.2)",
+                  border: "1px solid rgba(255,255,255,0.25)",
+                  borderRadius: "2px",
+                }}
+              />
+              {/* Straw */}
+              <div
+                className="absolute right-4 -top-3 w-0.5 h-10"
+                style={{ background: "linear-gradient(to bottom, #e8a44a, #c87020)", borderRadius: "2px" }}
+              />
+            </div>
+            {/* Condensation */}
+            <div className="absolute -left-0.5 top-5 w-0.5 h-2 rounded-full bg-white/20" />
+            <div className="absolute -left-0.5 top-9 w-0.5 h-1.5 rounded-full bg-white/15" />
+            <div className="absolute -right-0.5 top-7 w-0.5 h-2.5 rounded-full bg-white/20" />
+          </div>
+        </div>
+        {/* Bottom gradient on image area */}
+        <div className="absolute inset-x-0 bottom-0 h-6 bg-linear-to-t from-black/30 to-transparent" />
+      </div>
+
+      {/* Content */}
+      <div className="p-3.5">
+        <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-600/25 border border-brand-500/25 mb-2">
+          <span className="w-1 h-1 rounded-full bg-brand-400 animate-pulse" />
+          <span className="text-brand-300 text-[10px] font-medium tracking-wide">{t("promo_badge")}</span>
+        </div>
+        <p className="text-white font-bold text-sm leading-snug">{t("promo_title")}</p>
+        <p
+          className="font-black text-xl leading-tight mt-0.5"
+          style={{
+            background: "linear-gradient(135deg, #d9892a, #f4c56a)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          {t("promo_price")}
+        </p>
+        <p className="text-zinc-500 text-[11px] mt-1 leading-snug">{t("promo_sub")}</p>
+      </div>
+    </div>
+  );
+}
 
 export function Hero() {
   const t = useTranslations("hero");
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const opacityScroll = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [slideProgress, setSlideProgress] = useState(0);
+
+  useEffect(() => {
+    if (HERO_IMAGES.length <= 1) return;
+    setSlideProgress(0);
+    const start = Date.now();
+    const progressInterval = setInterval(() => {
+      setSlideProgress(Math.min((Date.now() - start) / SLIDE_MS, 1));
+    }, 50);
+    const slideTimeout = setTimeout(() => {
+      setCurrentIdx((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, SLIDE_MS);
+    return () => {
+      clearInterval(progressInterval);
+      clearTimeout(slideTimeout);
+    };
+  }, [currentIdx]);
 
   return (
     <section
@@ -20,129 +181,128 @@ export function Hero() {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
     >
-      {/* Hero background image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/hero/rumeli-cam.jpg"
-          alt="Rumeli İskelesi"
-          fill
-          className="object-cover opacity-55"
-          priority
-        />
-      </div>
+      {/* ── Slideshow background with Ken Burns ── */}
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={currentIdx}
+          className="absolute inset-0"
+          initial={{ opacity: 0, scale: 1.0 }}
+          animate={{ opacity: 1, scale: 1.08 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            opacity: { duration: 1.4, ease: "easeInOut" },
+            scale: { duration: 8, ease: "linear" },
+          }}
+        >
+          <Image
+            src={HERO_IMAGES[currentIdx].src}
+            alt={HERO_IMAGES[currentIdx].alt}
+            fill
+            className="object-cover"
+            style={{ opacity: 0.62 }}
+            priority={currentIdx === 0}
+            sizes="100vw"
+          />
+        </motion.div>
+      </AnimatePresence>
 
-      {/* Dark gradient overlay */}
-      <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-black/80 z-1" />
+      {/* ── Cinematic overlay (vignette + top/bottom darken) ── */}
+      <div
+        className="absolute inset-0 z-1 pointer-events-none"
+        style={{
+          background: [
+            "radial-gradient(ellipse at 50% 50%, transparent 20%, rgba(0,0,0,0.40) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.82) 100%)",
+          ].join(", "),
+        }}
+      />
 
-      {/* Sparkles on top */}
+      {/* ── Sparkles ── */}
       <div className="absolute inset-0 z-2 pointer-events-none">
         <SparklesCore
           background="transparent"
           minSize={0.4}
-          maxSize={1.2}
-          particleDensity={50}
+          maxSize={1.1}
+          particleDensity={35}
           particleColor="#d9892a"
-          speed={0.5}
+          speed={0.4}
           className="w-full h-full"
         />
       </div>
 
-      {/* Center glow */}
+      {/* ── Center amber glow ── */}
       <div className="absolute inset-0 z-2 pointer-events-none flex items-center justify-center">
         <div
           className="w-150 h-100 rounded-full"
           style={{
-            background: "radial-gradient(ellipse at center, rgba(217,137,42,0.10) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse at center, rgba(217,137,42,0.11) 0%, transparent 70%)",
             animation: "glow-pulse 6s ease-in-out infinite",
           }}
         />
       </div>
 
-      {/* Nescafe promo card — bottom-right */}
-      <motion.div
-        initial={{ opacity: 0, x: 40, y: 20 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ delay: 1.3, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className="absolute bottom-24 right-6 md:bottom-16 md:right-10 z-10 max-w-50"
-      >
-        <div className="relative overflow-hidden rounded-2xl border border-brand-500/30 bg-black/60 backdrop-blur-md shadow-2xl shadow-brand-900/40 p-4">
-          {/* Gradient placeholder for image */}
-          <div className="w-full h-24 rounded-xl mb-3 overflow-hidden relative">
-            <div
-              className="absolute inset-0"
+      {/* ── Slide indicators (bottom-left, only when multiple images) ── */}
+      {HERO_IMAGES.length > 1 && (
+        <div className="absolute bottom-10 left-5 z-10 flex items-center gap-1.5">
+          {HERO_IMAGES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIdx(i)}
+              aria-label={`Görsel ${i + 1}`}
+              className="relative h-0.5 rounded-full overflow-hidden transition-all duration-300"
               style={{
-                background: "linear-gradient(135deg, #1a2a3a 0%, #0d1a2a 40%, #1a2a1a 100%)",
+                width: i === currentIdx ? 28 : 10,
+                background: "rgba(255,255,255,0.22)",
               }}
-            />
-            {/* Glass with ice cubes illustration via CSS */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative">
-                {/* Glass */}
-                <div className="w-12 h-16 rounded-b-lg border-2 border-white/20 bg-linear-to-b from-amber-900/40 to-amber-950/60 relative overflow-hidden">
-                  {/* Liquid */}
-                  <div className="absolute bottom-0 inset-x-0 h-3/4 bg-linear-to-b from-amber-700/50 to-amber-900/70" />
-                  {/* Ice cubes */}
-                  <div className="absolute top-2 left-1 w-3 h-3 bg-white/30 rounded-sm rotate-12" />
-                  <div className="absolute top-3 right-1 w-2.5 h-2.5 bg-white/25 rounded-sm -rotate-6" />
-                  {/* Straw */}
-                  <div className="absolute top-0 right-3 w-0.5 h-8 bg-brand-400/70 -translate-y-4" />
-                </div>
-                {/* Condensation drops */}
-                <div className="absolute -left-1 top-4 w-0.5 h-1.5 bg-white/20 rounded-full" />
-                <div className="absolute -right-1 top-6 w-0.5 h-2 bg-white/15 rounded-full" />
-              </div>
-            </div>
-            {/* Frost overlay */}
-            <div className="absolute inset-0 bg-linear-to-br from-cyan-900/10 to-transparent" />
-          </div>
-
-          {/* Badge */}
-          <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-600/30 border border-brand-500/30 text-brand-300 text-[10px] font-medium mb-2">
-            <span className="w-1 h-1 rounded-full bg-brand-400 animate-pulse" />
-            {t("promo_badge")}
-          </div>
-
-          <p className="text-white font-bold text-sm leading-snug">{t("promo_title")}</p>
-          <p
-            className="font-black text-lg leading-none mt-0.5"
-            style={{
-              background: "linear-gradient(135deg, #d9892a, #f4c56a)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            {t("promo_price")}
-          </p>
-          <p className="text-zinc-500 text-[11px] mt-1">{t("promo_sub")}</p>
+            >
+              {i === currentIdx && (
+                <motion.div
+                  className="absolute inset-y-0 left-0 bg-brand-400 rounded-full"
+                  style={{ width: `${slideProgress * 100}%` }}
+                />
+              )}
+            </button>
+          ))}
         </div>
+      )}
+
+      {/* ── Desktop promo card (hidden on mobile) ── */}
+      <motion.div
+        initial={{ opacity: 0, x: 30, y: 20 }}
+        animate={{ opacity: 1, x: 0, y: 0 }}
+        transition={{ delay: 1.4, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+        className="absolute bottom-20 right-5 z-10 hidden md:block"
+      >
+        <DesktopPromoCard />
       </motion.div>
 
-      {/* Content */}
+      {/* ── Main content ── */}
       <motion.div
-        style={{ y: contentY, opacity }}
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
+        style={{ y: contentY, opacity: opacityScroll }}
+        className="relative z-10 text-center px-5 max-w-5xl mx-auto w-full"
       >
-        {/* Badge */}
+        {/* Location badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-brand-600/40 bg-black/40 backdrop-blur-sm text-brand-300 text-xs tracking-widest uppercase"
+          className="inline-flex items-center gap-2 mb-6 sm:mb-8 px-4 py-1.5 rounded-full border border-brand-600/40 bg-black/40 backdrop-blur-sm text-brand-300 text-xs tracking-widest uppercase"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse" />
           {t("badge")}
         </motion.div>
 
-        {/* Main title */}
+        {/* Title */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-5xl sm:text-6xl md:text-8xl font-bold leading-none tracking-tight mb-6"
+          className="text-5xl sm:text-6xl md:text-8xl font-bold leading-none tracking-tight mb-5"
           style={{ fontFamily: "var(--font-playfair, Georgia, serif)" }}
         >
-          <span className="block text-white drop-shadow-2xl">{t("title1")}</span>
+          <span className="block text-white" style={{ textShadow: "0 4px 24px rgba(0,0,0,0.9)" }}>
+            {t("title1")}
+          </span>
           <span
             className="block"
             style={{
@@ -152,6 +312,7 @@ export function Hero() {
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
               animation: "shimmer 4s linear infinite",
+              filter: "drop-shadow(0 4px 16px rgba(217,137,42,0.4))",
             }}
           >
             {t("title2")}
@@ -163,10 +324,11 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="text-zinc-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8 drop-shadow-lg"
+          className="text-zinc-200 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-6"
+          style={{ textShadow: "0 2px 16px rgba(0,0,0,0.9)" }}
         >
           {t("subtitle_before")}
-          <span className="text-brand-300">{t("subtitle_highlight")}</span>
+          <span className="text-brand-300 font-semibold">{t("subtitle_highlight")}</span>
           {t("subtitle_after")}
         </motion.p>
 
@@ -175,7 +337,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
-          className="flex justify-center mb-8"
+          className="flex justify-center mb-7"
         >
           <WeatherWidget />
         </motion.div>
@@ -185,36 +347,45 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.65 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3"
         >
           <motion.a
             href="#menu"
-            whileHover={{ scale: 1.05, y: -2 }}
+            whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-full text-sm font-medium transition-colors duration-200 shadow-lg shadow-brand-600/30"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-full text-sm font-semibold transition-colors duration-200 shadow-lg shadow-brand-600/35"
           >
             {t("cta_menu")}
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </motion.a>
-
           <motion.a
             href="#gallery"
-            whileHover={{ scale: 1.05, y: -2 }}
+            whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 hover:border-white/40 bg-black/20 backdrop-blur-sm rounded-full text-sm font-medium text-zinc-200 hover:text-white transition-all duration-200"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/25 hover:border-white/50 bg-black/25 backdrop-blur-sm rounded-full text-sm font-medium text-zinc-100 hover:text-white transition-all duration-200"
           >
             {t("cta_gallery")}
           </motion.a>
+        </motion.div>
+
+        {/* Mobile promo pill (below CTAs, hidden on md+) */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0, duration: 0.5 }}
+          className="flex justify-center mt-5 md:hidden"
+        >
+          <MobilePromoPill />
         </motion.div>
 
         {/* Stats */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
-          className="mt-20 flex items-center justify-center gap-12 text-center"
+          transition={{ delay: 1.0, duration: 0.8 }}
+          className="mt-12 sm:mt-16 flex items-center justify-center gap-8 sm:gap-12 text-center"
         >
           {[
             { value: t("stat1_value"), label: t("stat1_label") },
@@ -223,17 +394,20 @@ export function Hero() {
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col gap-1">
               <span
-                className="text-2xl md:text-3xl font-bold drop-shadow"
+                className="text-2xl md:text-3xl font-bold"
                 style={{
                   background: "linear-gradient(135deg, #d9892a, #f4c56a)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
+                  filter: "drop-shadow(0 2px 8px rgba(217,137,42,0.35))",
                 }}
               >
                 {stat.value}
               </span>
-              <span className="text-xs text-zinc-400 uppercase tracking-wider">{stat.label}</span>
+              <span className="text-[10px] sm:text-xs text-zinc-400 uppercase tracking-wider">
+                {stat.label}
+              </span>
             </div>
           ))}
         </motion.div>
@@ -243,14 +417,14 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+        transition={{ delay: 1.3 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
       >
-        <span className="text-xs text-zinc-500 tracking-widest uppercase">{t("scroll")}</span>
+        <span className="text-[10px] text-zinc-500 tracking-widest uppercase">{t("scroll")}</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px h-12 bg-linear-to-b from-brand-600 to-transparent"
+          className="w-px h-10 bg-linear-to-b from-brand-600 to-transparent"
         />
       </motion.div>
     </section>
