@@ -1,0 +1,115 @@
+{
+  "announcement": {
+    "main": "Mutlukent Esenlik Hizmetleri A.Ş · Отворено за всички · Всеки ден 09:00 – 00:00",
+    "summer": "☀️ Лятна оферта · Студено Нескафе само ₺100 · Охладете се!",
+    "winter": "❄️ Зимен сезон · Горещ чай ₺15 · Салеп наличен · Елате вътре да се стоплите"
+  },
+  "navbar": {
+    "home": "Начало",
+    "menu": "Меню",
+    "gallery": "Галерия",
+    "contact": "Контакти"
+  },
+  "hero": {
+    "badge": "Текирдаг · Община Сюлейманпаша",
+    "title1": "Rumeli",
+    "title2": "İskelesi",
+    "subtitle_before": "Изключително ",
+    "subtitle_highlight": "публично",
+    "subtitle_after": " кафе и ресторант с гледка към великолепния пролив.",
+    "cta_menu": "Разгледай менюто",
+    "cta_gallery": "Виж галерията",
+    "stat1_value": "10K+",
+    "stat1_label": "Дневни посетители",
+    "stat2_value": "За всички",
+    "stat2_label": "Публично място",
+    "stat3_value": "7/7",
+    "stat3_label": "Обслужване",
+    "scroll": "Разгледай",
+    "promo_badge": "Лятна оферта",
+    "promo_title": "Студено Нескафе",
+    "promo_price": "само ₺100",
+    "promo_sub": "Охладете се това лято"
+  },
+  "infobar": {
+    "open": "Отворено",
+    "closed": "Затворено",
+    "loading": "Зарежда се…",
+    "closes_in_h": "Затваря след {h}ч {m}мин",
+    "closes_in_m": "Затваря след {m} мин",
+    "opens_in_h": "Отваря след {h}ч {m}мин",
+    "opens_in_m": "Отваря след {m} мин",
+    "location_label": "Местоположение",
+    "location_value": "Rumeli İskelesi",
+    "location_sub": "Сюлейманпаша / Текирдаг",
+    "hours_label": "Работно време",
+    "hours_value": "09:00 – 00:00",
+    "hours_sub": "Всеки ден",
+    "capacity_label": "Капацитет",
+    "capacity_value": "Просторно",
+    "capacity_sub": "Вътрешна и открита зона",
+    "business_label": "Оператор",
+    "business_value": "Mutlukent",
+    "business_sub": "Esenlik Hizmetleri A.Ş"
+  },
+  "featured": {
+    "badge": "Популярни избори",
+    "title": "Препоръчани ястия",
+    "see_all": "Цялото меню",
+    "drag_hint": "← плъзнете →"
+  },
+  "menu": {
+    "badge": "Нашето меню",
+    "title": "Нашите вкусотии",
+    "vat": "Всички цени включват ДДС.",
+    "all": "Всички",
+    "item_count": "{count} продукта",
+    "price_ask": "Питайте за цена",
+    "price_ask_short": "Питайте",
+    "allergen_note": "⚠ За информация относно алергени, моля попитайте персонала. Снимките са илюстративни.",
+    "qr_title": "Вижте менюто на телефона си",
+    "qr_desc": "Сканирайте QR кода за незабавен достъп до дигиталното меню.",
+    "seasonal_badge": "Зимен сезон"
+  },
+  "reviews": {
+    "badge": "Отзиви на клиенти",
+    "title1": "Какво казват",
+    "title2": "нашите гости",
+    "google_review": "Google отзив",
+    "see_all": "Вижте всички отзиви в Google",
+    "count": "{count} Google отзива"
+  },
+  "gallery": {
+    "badge": "Нашето място",
+    "title1": "Моменти от",
+    "title2": "Rumeli İskelesi",
+    "live": "На живо",
+    "instagram_label": "@mutlukent.sosyal"
+  },
+  "footer": {
+    "description": "Публично кафе и ресторант край морето, управлявано от Mutlukent Esenlik Hizmetleri A.Ş.",
+    "contact_title": "Контакти и местоположение",
+    "address": "Rumeli İskelesi, Сюлейманпаша / Текирдаг",
+    "hours": "Всеки ден 09:00 – 00:00",
+    "social_title": "Социални мрежи",
+    "social_desc": "Следвайте ни за събития, новини и красиви моменти.",
+    "directions": "Вземи упътване",
+    "copyright": "© 2025 Rumeli İskelesi · Mutlukent Esenlik Hizmetleri A.Ş",
+    "country": "Текирдаг, Турция",
+    "map_label": "Rumeli İskelesi · Сюлейманпаша / Текирдаг"
+  },
+  "sticky": {
+    "location": "Местоположение",
+    "instagram": "Instagram",
+    "menu": "Меню"
+  },
+  "weather": {
+    "title": "Текирдаг днес",
+    "feels_like": "Усеща се",
+    "humidity": "Влажност",
+    "wind": "Вятър",
+    "loading": "Зарежда се…",
+    "error": "Времето недостъпно",
+    "wind_unit": "км/ч"
+  }
+}

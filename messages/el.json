@@ -1,0 +1,115 @@
+{
+  "announcement": {
+    "main": "Mutlukent Esenlik Hizmetleri A.Ş · Ανοιχτό για όλους · Κάθε μέρα 09:00 – 00:00",
+    "summer": "☀️ Καλοκαιρινή προσφορά · Κρύο Nescafé μόνο ₺100 · Δροσιστείτε!",
+    "winter": "❄️ Χειμερινή σεζόν · Ζεστό τσάι ₺15 · Salep διαθέσιμο · Ελάτε μέσα να ζεσταθείτε"
+  },
+  "navbar": {
+    "home": "Αρχική",
+    "menu": "Μενού",
+    "gallery": "Γκαλερί",
+    "contact": "Επικοινωνία"
+  },
+  "hero": {
+    "badge": "Τεκιρντάγ · Δήμος Σουλεϊμανπασά",
+    "title1": "Rumeli",
+    "title2": "İskelesi",
+    "subtitle_before": "Μια εξαιρετική ",
+    "subtitle_highlight": "δημόσια",
+    "subtitle_after": " καφετέρια και εστιατόριο με θέα στο εκπληκτικό στενό.",
+    "cta_menu": "Δείτε το Μενού",
+    "cta_gallery": "Δείτε τη Γκαλερί",
+    "stat1_value": "10K+",
+    "stat1_label": "Ημερήσιοι επισκέπτες",
+    "stat2_value": "Δημόσιο",
+    "stat2_label": "Ανοιχτό μέρος",
+    "stat3_value": "7/7",
+    "stat3_label": "Εξυπηρέτηση",
+    "scroll": "Ανακαλύψτε",
+    "promo_badge": "Καλοκαιρινή προσφορά",
+    "promo_title": "Κρύο Nescafé",
+    "promo_price": "μόνο ₺100",
+    "promo_sub": "Δροσιστείτε αυτό το καλοκαίρι"
+  },
+  "infobar": {
+    "open": "Ανοιχτό τώρα",
+    "closed": "Κλειστό τώρα",
+    "loading": "Φόρτωση…",
+    "closes_in_h": "Κλείνει σε {h}ω {m}λ",
+    "closes_in_m": "Κλείνει σε {m} λεπτά",
+    "opens_in_h": "Ανοίγει σε {h}ω {m}λ",
+    "opens_in_m": "Ανοίγει σε {m} λεπτά",
+    "location_label": "Τοποθεσία",
+    "location_value": "Rumeli İskelesi",
+    "location_sub": "Σουλεϊμανπασά / Τεκιρντάγ",
+    "hours_label": "Ώρες λειτουργίας",
+    "hours_value": "09:00 – 00:00",
+    "hours_sub": "Κάθε μέρα ανοιχτό",
+    "capacity_label": "Χωρητικότητα",
+    "capacity_value": "Ευρύχωρο",
+    "capacity_sub": "Εσωτερικός & εξωτερικός χώρος",
+    "business_label": "Διαχειριστής",
+    "business_value": "Mutlukent",
+    "business_sub": "Esenlik Hizmetleri A.Ş"
+  },
+  "featured": {
+    "badge": "Δημοφιλείς επιλογές",
+    "title": "Επιλεγμένες γεύσεις",
+    "see_all": "Πλήρες μενού",
+    "drag_hint": "← σύρτε →"
+  },
+  "menu": {
+    "badge": "Το μενού μας",
+    "title": "Οι γεύσεις μας",
+    "vat": "Όλες οι τιμές συμπεριλαμβάνουν ΦΠΑ.",
+    "all": "Όλα",
+    "item_count": "{count} προϊόντα",
+    "price_ask": "Ρωτήστε για τιμή",
+    "price_ask_short": "Ρωτήστε",
+    "allergen_note": "⚠ Για πληροφορίες σχετικά με αλλεργιογόνα, ρωτήστε το προσωπικό μας. Οι εικόνες είναι ενδεικτικές.",
+    "qr_title": "Δείτε το μενού στο κινητό σας",
+    "qr_desc": "Σαρώστε τον κωδικό QR για άμεση πρόσβαση στο ψηφιακό μενού.",
+    "seasonal_badge": "Χειμερινή σεζόν"
+  },
+  "reviews": {
+    "badge": "Κριτικές πελατών",
+    "title1": "Τι λένε",
+    "title2": "οι επισκέπτες μας",
+    "google_review": "Κριτική Google",
+    "see_all": "Δείτε όλες τις κριτικές στο Google",
+    "count": "{count} κριτικές Google"
+  },
+  "gallery": {
+    "badge": "Ο χώρος μας",
+    "title1": "Στιγμές από το",
+    "title2": "Rumeli İskelesi",
+    "live": "Ζωντανά",
+    "instagram_label": "@mutlukent.sosyal"
+  },
+  "footer": {
+    "description": "Δημόσια καφετέρια και εστιατόριο δίπλα στη θάλασσα, που διαχειρίζεται η Mutlukent Esenlik Hizmetleri A.Ş.",
+    "contact_title": "Επικοινωνία & Τοποθεσία",
+    "address": "Rumeli İskelesi, Σουλεϊμανπασά / Τεκιρντάγ",
+    "hours": "Κάθε μέρα 09:00 – 00:00",
+    "social_title": "Κοινωνικά δίκτυα",
+    "social_desc": "Ακολουθήστε μας για εκδηλώσεις, νέα και όμορφες στιγμές.",
+    "directions": "Οδηγίες",
+    "copyright": "© 2025 Rumeli İskelesi · Mutlukent Esenlik Hizmetleri A.Ş",
+    "country": "Τεκιρντάγ, Τουρκία",
+    "map_label": "Rumeli İskelesi · Σουλεϊμανπασά / Τεκιρντάγ"
+  },
+  "sticky": {
+    "location": "Τοποθεσία",
+    "instagram": "Instagram",
+    "menu": "Μενού"
+  },
+  "weather": {
+    "title": "Τεκιρντάγ σήμερα",
+    "feels_like": "Αίσθηση",
+    "humidity": "Υγρασία",
+    "wind": "Άνεμος",
+    "loading": "Φόρτωση καιρού…",
+    "error": "Ο καιρός δεν είναι διαθέσιμος",
+    "wind_unit": "χλμ/ώ"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "announcement": {
+    "main": "Mutlukent Esenlik Hizmetleri A.Ş · Open to the public · Every day 09:00 – 00:00",
+    "summer": "☀️ Summer special · Cold Nescafé only ₺100 · Stay cool!",
+    "winter": "❄️ Winter season · Hot tea ₺15 · Salep available · Come inside and warm up"
+  },
+  "navbar": {
+    "home": "Home",
+    "menu": "Menu",
+    "gallery": "Gallery",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Tekirdağ · Süleymanpaşa Municipality",
+    "title1": "Rumeli",
+    "title2": "İskelesi",
+    "subtitle_before": "An extraordinary ",
+    "subtitle_highlight": "public",
+    "subtitle_after": " cafeteria and restaurant experience overlooking the magnificent strait.",
+    "cta_menu": "Explore Menu",
+    "cta_gallery": "View Gallery",
+    "stat1_value": "10K+",
+    "stat1_label": "Daily Visitors",
+    "stat2_value": "Public",
+    "stat2_label": "Open Venue",
+    "stat3_value": "7/7",
+    "stat3_label": "Service",
+    "scroll": "Explore",
+    "promo_badge": "Summer Special",
+    "promo_title": "Cold Nescafé",
+    "promo_price": "only ₺100",
+    "promo_sub": "Stay cool this summer"
+  },
+  "infobar": {
+    "open": "Open Now",
+    "closed": "Closed Now",
+    "loading": "Loading…",
+    "closes_in_h": "Closes in {h}h {m}min",
+    "closes_in_m": "Closes in {m} min",
+    "opens_in_h": "Opens in {h}h {m}min",
+    "opens_in_m": "Opens in {m} min",
+    "location_label": "Location",
+    "location_value": "Rumeli İskelesi",
+    "location_sub": "Süleymanpaşa / Tekirdağ",
+    "hours_label": "Opening Hours",
+    "hours_value": "09:00 – 00:00",
+    "hours_sub": "Open every day",
+    "capacity_label": "Capacity",
+    "capacity_value": "Spacious",
+    "capacity_sub": "Indoor & outdoor area",
+    "business_label": "Operator",
+    "business_value": "Mutlukent",
+    "business_sub": "Esenlik Hizmetleri A.Ş"
+  },
+  "featured": {
+    "badge": "Popular Choices",
+    "title": "Featured Flavors",
+    "see_all": "Full menu",
+    "drag_hint": "← swipe →"
+  },
+  "menu": {
+    "badge": "Our Menu",
+    "title": "Our Flavors",
+    "vat": "All prices include VAT.",
+    "all": "All",
+    "item_count": "{count} items",
+    "price_ask": "Ask for price",
+    "price_ask_short": "Ask",
+    "allergen_note": "⚠ For allergen information please ask our staff. Images are illustrative.",
+    "qr_title": "View Menu on Your Phone",
+    "qr_desc": "Scan the QR code for instant access to the digital menu. Plan your order before sitting down.",
+    "seasonal_badge": "Winter Season"
+  },
+  "reviews": {
+    "badge": "Customer Reviews",
+    "title1": "What Our",
+    "title2": "Guests Say",
+    "google_review": "Google Review",
+    "see_all": "See all reviews on Google",
+    "count": "{count} Google reviews"
+  },
+  "gallery": {
+    "badge": "Our Venue",
+    "title1": "Moments from",
+    "title2": "Rumeli İskelesi",
+    "live": "Live",
+    "instagram_label": "@mutlukent.sosyal"
+  },
+  "footer": {
+    "description": "A public cafeteria and restaurant by the sea, operated by Mutlukent Esenlik Hizmetleri A.Ş.",
+    "contact_title": "Contact & Location",
+    "address": "Rumeli İskelesi, Süleymanpaşa / Tekirdağ",
+    "hours": "Every day 09:00 – 00:00",
+    "social_title": "Social Media",
+    "social_desc": "Follow us for events, news and beautiful moments.",
+    "directions": "Get directions",
+    "copyright": "© 2025 Rumeli İskelesi · Mutlukent Esenlik Hizmetleri A.Ş",
+    "country": "Tekirdağ, Turkey",
+    "map_label": "Rumeli İskelesi · Süleymanpaşa / Tekirdağ"
+  },
+  "sticky": {
+    "location": "Location",
+    "instagram": "Instagram",
+    "menu": "Menu"
+  },
+  "weather": {
+    "title": "Tekirdağ Today",
+    "feels_like": "Feels like",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "loading": "Loading weather…",
+    "error": "Weather unavailable",
+    "wind_unit": "km/h"
+  }
+}

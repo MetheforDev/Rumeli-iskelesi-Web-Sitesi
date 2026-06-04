@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rumeli-iskelesi-web-sitesi.vercel.app/sitemap.xml

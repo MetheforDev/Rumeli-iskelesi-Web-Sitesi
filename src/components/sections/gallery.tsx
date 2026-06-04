@@ -1,0 +1,208 @@
+"use client";
+
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import Image from "next/image";
+import { TextReveal } from "@/components/ui/text-reveal";
+import { Lightbox } from "@/components/ui/lightbox";
+import { useTranslations } from "next-intl";
+
+type GalleryItem = {
+  id: number;
+  type: "image" | "video";
+  src: string;
+  poster?: string;
+  alt: string;
+  span: string;
+  captionKey: string;
+};
+
+const galleryItems: GalleryItem[] = [
+  {
+    id: 1,
+    type: "image",
+    src: "/images/gallery/rumeli-cam.jpg",
+    alt: "Rumeli İskelesi iç mekan",
+    span: "col-span-2 row-span-2",
+    captionKey: "İç Mekan",
+  },
+  {
+    id: 2,
+    type: "image",
+    src: "/images/gallery/iskele-dondurma.jpg",
+    alt: "İskele dondurma",
+    span: "col-span-1 row-span-1",
+    captionKey: "Dondurma",
+  },
+  {
+    id: 3,
+    type: "image",
+    src: "/images/hero/rumeli-cam.jpg",
+    alt: "Rumeli İskelesi",
+    span: "col-span-1 row-span-1",
+    captionKey: "Rumeli İskelesi",
+  },
+];
+
+function GalleryCard({
+  item,
+  index,
+  onClick,
+}: {
+  item: GalleryItem;
+  index: number;
+  onClick: () => void;
+}) {
+  const t = useTranslations("gallery");
+  const [hovered, setHovered] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className={`relative overflow-hidden rounded-2xl cursor-pointer bg-zinc-900 ${item.span}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onClick={onClick}
+    >
+      {item.type === "video" ? (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={item.poster}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
+          style={{ transform: hovered ? "scale(1.06)" : "scale(1)" }}
+        >
+          <source src={item.src} type="video/mp4" />
+        </video>
+      ) : (
+        <Image
+          src={item.src}
+          alt={item.alt}
+          fill
+          className="object-cover transition-transform duration-700"
+          style={{ transform: hovered ? "scale(1.08)" : "scale(1)" }}
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+      )}
+
+      <div
+        className="absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-transparent transition-opacity duration-300"
+        style={{ opacity: hovered ? 1 : 0.3 }}
+      />
+
+      {item.type === "video" && (
+        <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/10">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+          <span className="text-white text-xs">{t("live")}</span>
+        </div>
+      )}
+
+      <motion.div
+        animate={{ y: hovered ? 0 : 6, opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.25 }}
+        className="absolute bottom-4 left-4"
+      >
+        <span className="text-white font-medium text-sm drop-shadow">{item.captionKey}</span>
+      </motion.div>
+
+      <div
+        className="absolute inset-0 rounded-2xl ring-1 ring-brand-500/50 pointer-events-none transition-opacity duration-300"
+        style={{ opacity: hovered ? 1 : 0 }}
+      />
+    </motion.div>
+  );
+}
+
+export function Gallery() {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+  const t = useTranslations("gallery");
+  const imageItems = galleryItems.filter((i) => i.type === "image");
+
+  return (
+    <section id="gallery" ref={sectionRef} className="py-32 px-6 bg-[#050505] relative">
+      <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
+
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-brand-600/30 text-brand-400 text-xs tracking-widest uppercase"
+          >
+            {t("badge")}
+          </motion.div>
+          <TextReveal
+            text={t("title1")}
+            className="justify-center text-4xl md:text-5xl font-bold text-white mb-2"
+          />
+          <TextReveal
+            text={t("title2")}
+            delay={0.2}
+            className="justify-center text-4xl md:text-5xl font-bold"
+          />
+        </div>
+
+        <div className="grid grid-cols-3 gap-3" style={{ gridTemplateRows: "260px 260px" }}>
+          {galleryItems.map((item, i) => (
+            <GalleryCard
+              key={item.id}
+              item={item}
+              index={i}
+              onClick={() =>
+                item.type === "image" &&
+                setLightboxIdx(imageItems.findIndex((img) => img.id === item.id))
+              }
+            />
+          ))}
+        </div>
+
+        {lightboxIdx !== null && (
+          <Lightbox
+            src={imageItems[lightboxIdx].src}
+            alt={imageItems[lightboxIdx].captionKey}
+            onClose={() => setLightboxIdx(null)}
+            onPrev={() => setLightboxIdx((prev) => (prev! > 0 ? prev! - 1 : prev))}
+            onNext={() =>
+              setLightboxIdx((prev) => (prev! < imageItems.length - 1 ? prev! + 1 : prev))
+            }
+            hasPrev={lightboxIdx > 0}
+            hasNext={lightboxIdx < imageItems.length - 1}
+          />
+        )}
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.6 }}
+          className="mt-10 flex justify-center"
+        >
+          <a
+            href="https://instagram.com/mutlukent.sosyal"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 hover:border-brand-500/40 bg-white/5 hover:bg-brand-600/10 transition-all duration-300"
+          >
+            <svg className="w-5 h-5 text-brand-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+            <span className="text-sm text-zinc-300 group-hover:text-white transition-colors">
+              {t("instagram_label")}
+            </span>
+            <svg className="w-3.5 h-3.5 text-zinc-600 group-hover:text-brand-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
