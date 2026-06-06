@@ -8,20 +8,23 @@ interface Props {
 export async function RestaurantJsonLd({ locale }: Props) {
   const t = await getTranslations({ locale, namespace: "seo" });
 
-  const schema = {
+  const address: Record<string, string> = {
+    "@type": "PostalAddress",
+    streetAddress: NAP.address.street,
+    addressLocality: NAP.address.city,
+    addressRegion: NAP.address.region,
+    addressCountry: NAP.address.country,
+  };
+  if (NAP.address.postalCode) address.postalCode = NAP.address.postalCode;
+
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
     name: NAP.name,
     description: t("description"),
     url: `${SITE_URL}/${locale}`,
     image: `${SITE_URL}${NAP.heroImage}`,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: NAP.address.street,
-      addressLocality: NAP.address.city,
-      addressRegion: NAP.address.region,
-      addressCountry: NAP.address.country,
-    },
+    address,
     geo: {
       "@type": "GeoCoordinates",
       latitude: NAP.geo.lat,
@@ -30,28 +33,19 @@ export async function RestaurantJsonLd({ locale }: Props) {
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
         opens: NAP.hours.opens,
         closes: NAP.hours.closes,
       },
     ],
-    servesCuisine: ["Turkish", "Fast Food", "Desserts"],
+    servesCuisine: ["Turkish", "Breakfast", "Fast Food", "Coffee", "Desserts"],
     priceRange: "₺",
     sameAs: [NAP.instagram],
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  // Boş opsiyonel alanlar schema'ya girmesin (Google "boş değer" uyarısı vermesin)
+  if (NAP.googleMapsUrl) schema.hasMap = NAP.googleMapsUrl;
+
+  const json = JSON.stringify(schema).replace(/</g, "\\u003c");
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
 }

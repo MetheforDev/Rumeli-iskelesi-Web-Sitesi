@@ -18,13 +18,16 @@ export const NAP = {
   operator: "Mutlukent Esenlik Hizmetleri A.Ş",
   email: "rumeliskelesi@gmail.com",
   address: {
-    street: "Rumeli İskelesi",
+    street: "Cumhuriyet Mahallesi, Atatürk Bulvarı, Gülsin Onay Sk.",
     city: "Süleymanpaşa",
     region: "Tekirdağ",
+    postalCode: "59100",
     country: "TR",
   },
   geo: { lat: 40.966, lng: 27.515 },
   hours: { opens: "09:00", closes: "00:00" },
   instagram: "https://instagram.com/mutlukent.sosyal",
+  // Google işletme profili — Maps paylaşım linki
+  googleMapsUrl: "https://maps.app.goo.gl/HTfFUhUDxG3fNHWv9",
   heroImage: "/images/hero/rumeli-cam.jpg",
 } as const;
