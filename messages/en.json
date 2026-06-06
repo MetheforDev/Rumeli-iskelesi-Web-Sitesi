@@ -111,5 +111,13 @@
     "loading": "Loading weather…",
     "error": "Weather unavailable",
     "wind_unit": "km/h"
+  },
+  "seo": {
+    "title": "Rumeli İskelesi | Cafe and Restaurant — Tekirdağ Süleymanpaşa",
+    "description": "Run by Mutlukent Esenlik Hizmetleri A.Ş. Breakfast, Tekirdağ meatballs, fast food and desserts by the sea. Open to public, every day 09:00–midnight.",
+    "keywords": "Rumeli İskelesi, Tekirdağ restaurant, Süleymanpaşa cafe, Tekirdağ meatballs, seafront restaurant, Tekirdağ food Turkey",
+    "og_title": "Rumeli İskelesi | Cafe and Restaurant",
+    "og_description": "Unique flavours by the sea in Tekirdağ Süleymanpaşa, Turkey",
+    "og_image_alt": "Rumeli İskelesi cafe and restaurant by the sea"
   }
 }

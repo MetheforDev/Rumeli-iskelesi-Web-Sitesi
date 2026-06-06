@@ -111,5 +111,13 @@
     "loading": "Φόρτωση καιρού…",
     "error": "Ο καιρός δεν είναι διαθέσιμος",
     "wind_unit": "χλμ/ώ"
+  },
+  "seo": {
+    "title": "Rumeli İskelesi | Καφετέρια και Εστιατόριο — Tekirdağ Süleymanpaşa",
+    "description": "Λειτουργεί από την Mutlukent Esenlik Hizmetleri A.Ş. Πρωινό, κεφτεδάκια Tekirdağ, γρήγορο φαγητό και γλυκά δίπλα στη θάλασσα. Ανοιχτό για όλους, κάθε μέρα 09:00–00:00.",
+    "keywords": "Rumeli İskelesi, εστιατόριο Tekirdağ, καφετέρια Süleymanpaşa, κεφτεδάκια Tekirdağ, παραθαλάσσιο εστιατόριο, φαγητό Tekirdağ",
+    "og_title": "Rumeli İskelesi | Καφετέρια και Εστιατόριο",
+    "og_description": "Μοναδικές γεύσεις δίπλα στη θάλασσα στο Tekirdağ Süleymanpaşa",
+    "og_image_alt": "Καφετέρια και εστιατόριο Rumeli İskelesi δίπλα στη θάλασσα"
   }
 }

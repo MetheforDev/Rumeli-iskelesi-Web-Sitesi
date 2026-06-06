@@ -111,5 +111,13 @@
     "loading": "Hava durumu yükleniyor…",
     "error": "Hava durumu alınamadı",
     "wind_unit": "km/s"
+  },
+  "seo": {
+    "title": "Rumeli İskelesi | Kafeterya ve Restoran — Tekirdağ Süleymanpaşa",
+    "description": "Mutlukent Esenlik Hizmetleri A.Ş işletmesi. Deniz kenarında kahvaltı, Tekirdağ köftesi, fast food ve tatlılar. Halka açık, her gün 09:00–00:00.",
+    "keywords": "Rumeli İskelesi, Tekirdağ restoran, Süleymanpaşa kafeterya, Tekirdağ köftesi, Süleymanpaşa Belediyesi, deniz kenarı restoran, Tekirdağ yemek",
+    "og_title": "Rumeli İskelesi | Kafeterya ve Restoran",
+    "og_description": "Tekirdağ Süleymanpaşada deniz kenarında eşsiz lezzetler",
+    "og_image_alt": "Rumeli İskelesi kafeterya ve restoran"
   }
 }
