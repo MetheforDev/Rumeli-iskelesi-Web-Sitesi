@@ -7,13 +7,11 @@ import { SparklesCore } from "@/components/ui/sparkles";
 import { WeatherWidget } from "@/components/ui/weather-widget";
 import { useTranslations } from "next-intl";
 
-// Yeni görseller eklenince buraya ekleyin (public/images/hero/ altına koyun)
 const HERO_IMAGES = [
   { src: "/images/hero/rumeli-cam.jpg", alt: "Rumeli İskelesi" },
-  // { src: "/images/hero/rumeli-deniz.jpg", alt: "Deniz Manzarası" },
-  // { src: "/images/hero/rumeli-ic.jpg", alt: "İç Mekan" },
-  // { src: "/images/hero/rumeli-yemek.jpg", alt: "Lezzetler" },
-  // { src: "/images/hero/rumeli-gece.jpg", alt: "Gece Manzarası" },
+  { src: "/images/menu/Kahvaltı tabağı banner ai.jpg", alt: "Kahvaltı Tabağı" },
+  { src: "/images/menu/Türk kahvesi banner.jpg", alt: "Türk Kahvesi" },
+  { src: "/images/menu/Türk kahvesi double banner.jpg", alt: "Türk Kahvesi Double" },
 ];
 
 const SLIDE_MS = 5500;

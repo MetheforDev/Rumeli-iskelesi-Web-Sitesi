@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { generateSeoMetadata } from "@/lib/seo";
@@ -20,6 +20,14 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+// SSG: 4 locale'i build time'da üret
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+// Tanımsız diller (örn. /xx) 404 döndürsün
+export const dynamicParams = false;
+
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -37,6 +45,9 @@ export default async function LocaleLayout({ children, params }: Props) {
   if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }
+
+  // setRequestLocale MUTLAKA getMessages'tan önce
+  setRequestLocale(locale);
 
   const messages = await getMessages();
 

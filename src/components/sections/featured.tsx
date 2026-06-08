@@ -25,6 +25,14 @@ const featuredItems: FeaturedItem[] = [
     emoji: "🥩",
   },
   {
+    name: "Kahvaltı Tabağı",
+    desc: "Zengin kahvaltı tabağı, taze malzemelerle hazırlanır",
+    price: "300",
+    image: "/images/menu/Kahvaltı tabağı.jpg",
+    tag: "Sabah Favori",
+    emoji: "🍳",
+  },
+  {
     name: "Hamburger",
     desc: "El yapımı köfte, taze sebzeler ve özel sos ile",
     price: "250",
@@ -36,7 +44,7 @@ const featuredItems: FeaturedItem[] = [
     name: "San Sebastian",
     desc: "Premium tatlımız — ekstra çikolata sos ile servis edilir",
     price: "200",
-    image: "/images/menu/cift-kasarli-tost.jpg",
+    image: "/images/menu/San Sebastian ai.jpg",
     tag: "Premium",
     emoji: "🍮",
   },
