@@ -21,7 +21,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 1,
     type: "image",
-    src: "/images/gallery/Rumeli İskelesi drone çekim.jpg",
+    src: "/images/gallery/rumeli-drone-cekim.jpg",
     alt: "Rumeli İskelesi drone çekim",
     span: "col-span-2 row-span-2",
     captionKey: "Drone Çekim",
@@ -29,7 +29,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 2,
     type: "image",
-    src: "/images/gallery/Rumeli İskelesi ai shot.jpg",
+    src: "/images/gallery/rumeli-ai-shot.jpg",
     alt: "Rumeli İskelesi",
     span: "col-span-1 row-span-1",
     captionKey: "Rumeli İskelesi",
@@ -37,7 +37,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 3,
     type: "image",
-    src: "/images/gallery/Rumeli İskelesi flag scene.jpg",
+    src: "/images/gallery/rumeli-flag-scene.jpg",
     alt: "Rumeli İskelesi bayrak",
     span: "col-span-1 row-span-1",
     captionKey: "Bayrak Sahne",

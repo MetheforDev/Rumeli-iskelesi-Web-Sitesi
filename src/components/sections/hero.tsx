@@ -12,10 +12,10 @@ type HeroImage = { src: string; alt: string; duration?: number };
 const DEFAULT_SLIDE_MS = 5500;
 
 const HERO_IMAGES: HeroImage[] = [
-  { src: "/images/hero/Rumeli İskelesi drone çekim.jpg", alt: "Rumeli İskelesi Drone Çekim", duration: 18000 },
+  { src: "/images/hero/rumeli-drone-cekim.jpg", alt: "Rumeli İskelesi Drone Çekim", duration: 18000 },
   { src: "/images/hero/rumeli-cam.jpg", alt: "Rumeli İskelesi" },
-  { src: "/images/hero/Rumeli İskelesi ai shot.jpg", alt: "Rumeli İskelesi" },
-  { src: "/images/hero/Rumeli İskelesi flag scene.jpg", alt: "Rumeli İskelesi Bayrak" },
+  { src: "/images/hero/rumeli-ai-shot.jpg", alt: "Rumeli İskelesi" },
+  { src: "/images/hero/rumeli-flag-scene.jpg", alt: "Rumeli İskelesi Bayrak" },
   { src: "/images/menu/Kahvaltı tabağı banner ai.jpg", alt: "Kahvaltı Tabağı" },
   { src: "/images/menu/Türk kahvesi banner.jpg", alt: "Türk Kahvesi" },
   { src: "/images/menu/Türk kahvesi double banner.jpg", alt: "Türk Kahvesi Double" },
