@@ -7,14 +7,19 @@ import { SparklesCore } from "@/components/ui/sparkles";
 import { WeatherWidget } from "@/components/ui/weather-widget";
 import { useTranslations } from "next-intl";
 
-const HERO_IMAGES = [
+type HeroImage = { src: string; alt: string; duration?: number };
+
+const DEFAULT_SLIDE_MS = 5500;
+
+const HERO_IMAGES: HeroImage[] = [
+  { src: "/images/hero/Rumeli İskelesi drone çekim.jpg", alt: "Rumeli İskelesi Drone Çekim", duration: 18000 },
   { src: "/images/hero/rumeli-cam.jpg", alt: "Rumeli İskelesi" },
+  { src: "/images/hero/Rumeli İskelesi ai shot.jpg", alt: "Rumeli İskelesi" },
+  { src: "/images/hero/Rumeli İskelesi flag scene.jpg", alt: "Rumeli İskelesi Bayrak" },
   { src: "/images/menu/Kahvaltı tabağı banner ai.jpg", alt: "Kahvaltı Tabağı" },
   { src: "/images/menu/Türk kahvesi banner.jpg", alt: "Türk Kahvesi" },
   { src: "/images/menu/Türk kahvesi double banner.jpg", alt: "Türk Kahvesi Double" },
 ];
-
-const SLIDE_MS = 5500;
 
 function MobilePromoPill() {
   const t = useTranslations("hero");
@@ -160,13 +165,14 @@ export function Hero() {
   useEffect(() => {
     if (HERO_IMAGES.length <= 1) return;
     setSlideProgress(0);
+    const slideDuration = HERO_IMAGES[currentIdx].duration ?? DEFAULT_SLIDE_MS;
     const start = Date.now();
     const progressInterval = setInterval(() => {
-      setSlideProgress(Math.min((Date.now() - start) / SLIDE_MS, 1));
+      setSlideProgress(Math.min((Date.now() - start) / slideDuration, 1));
     }, 50);
     const slideTimeout = setTimeout(() => {
       setCurrentIdx((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, SLIDE_MS);
+    }, slideDuration);
     return () => {
       clearInterval(progressInterval);
       clearTimeout(slideTimeout);

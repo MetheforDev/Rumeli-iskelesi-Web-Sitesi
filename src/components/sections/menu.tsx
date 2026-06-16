@@ -77,8 +77,8 @@ const menuData: MenuCategory[] = [
     items: [
       { name: "Çay", price: "15" },
       { name: "Double Çay", price: "30", image: "/images/menu/Çay Double.jpg" },
-      { name: "Türk Kahvesi", image: "/images/menu/Türk Kahvesi.jpg" },
-      { name: "Türk Kahvesi Double", image: "/images/menu/Türk kahvesi Double.jpg" },
+      { name: "Türk Kahvesi", price: "75", image: "/images/menu/Türk Kahvesi.jpg" },
+      { name: "Türk Kahvesi Double", price: "100", image: "/images/menu/Türk kahvesi Double.jpg" },
       { name: "Oralet Çeşitleri", price: "15" },
       { name: "Adaçayı", price: "30" },
       { name: "Demleme Ihlamur", price: "100" },

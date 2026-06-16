@@ -21,13 +21,29 @@ const galleryItems: GalleryItem[] = [
   {
     id: 1,
     type: "image",
-    src: "/images/gallery/rumeli-cam.jpg",
-    alt: "Rumeli İskelesi iç mekan",
+    src: "/images/gallery/Rumeli İskelesi drone çekim.jpg",
+    alt: "Rumeli İskelesi drone çekim",
     span: "col-span-2 row-span-2",
-    captionKey: "İç Mekan",
+    captionKey: "Drone Çekim",
   },
   {
     id: 2,
+    type: "image",
+    src: "/images/gallery/Rumeli İskelesi ai shot.jpg",
+    alt: "Rumeli İskelesi",
+    span: "col-span-1 row-span-1",
+    captionKey: "Rumeli İskelesi",
+  },
+  {
+    id: 3,
+    type: "image",
+    src: "/images/gallery/Rumeli İskelesi flag scene.jpg",
+    alt: "Rumeli İskelesi bayrak",
+    span: "col-span-1 row-span-1",
+    captionKey: "Bayrak Sahne",
+  },
+  {
+    id: 4,
     type: "image",
     src: "/images/gallery/iskele-dondurma.jpg",
     alt: "İskele dondurma",
@@ -35,7 +51,15 @@ const galleryItems: GalleryItem[] = [
     captionKey: "Dondurma",
   },
   {
-    id: 3,
+    id: 5,
+    type: "image",
+    src: "/images/gallery/rumeli-cam.jpg",
+    alt: "Rumeli İskelesi iç mekan",
+    span: "col-span-1 row-span-1",
+    captionKey: "İç Mekan",
+  },
+  {
+    id: 6,
     type: "image",
     src: "/images/hero/rumeli-cam.jpg",
     alt: "Rumeli İskelesi",
@@ -151,7 +175,7 @@ export function Gallery() {
           />
         </div>
 
-        <div className="grid grid-cols-3 gap-3" style={{ gridTemplateRows: "260px 260px" }}>
+        <div className="grid grid-cols-3 gap-3" style={{ gridTemplateRows: "260px 260px 260px" }}>
           {galleryItems.map((item, i) => (
             <GalleryCard
               key={item.id}
