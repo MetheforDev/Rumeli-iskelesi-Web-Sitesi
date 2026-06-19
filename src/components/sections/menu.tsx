@@ -75,7 +75,7 @@ const menuData: MenuCategory[] = [
     label: "Sıcak İçecekler",
     emoji: "☕",
     items: [
-      { name: "Çay", price: "15" },
+      { name: "Çay", price: "15", image: "/images/menu/Çay ai.jpg" },
       { name: "Double Çay", price: "30", image: "/images/menu/Çay Double.jpg" },
       { name: "Türk Kahvesi", price: "75", image: "/images/menu/Türk Kahvesi.jpg" },
       { name: "Türk Kahvesi Double", price: "100", image: "/images/menu/Türk kahvesi Double.jpg" },

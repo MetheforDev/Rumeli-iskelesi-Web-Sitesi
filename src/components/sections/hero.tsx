@@ -55,13 +55,14 @@ function DesktopPromoCard() {
   const t = useTranslations("hero");
   return (
     <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/55 backdrop-blur-xl shadow-2xl w-48">
-      {/* Image placeholder — icelike gradient */}
+      {/* Soğuk Nescafe görseli */}
       <div className="relative h-28 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(145deg, #0a1628 0%, #0d2035 50%, #0a1a10 100%)",
-          }}
+        <Image
+          src="/images/menu/soguk-nescafe.jpg"
+          alt={t("promo_title")}
+          fill
+          className="object-cover"
+          sizes="192px"
         />
         {/* Frost shimmer */}
         <div
@@ -70,62 +71,8 @@ function DesktopPromoCard() {
             background: "radial-gradient(ellipse at 30% 40%, rgba(100,180,255,0.25) 0%, transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(200,230,255,0.15) 0%, transparent 50%)",
           }}
         />
-        {/* Glass illustration */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative">
-            {/* Outer glass */}
-            <div
-              className="w-14 h-20 relative"
-              style={{
-                border: "1.5px solid rgba(255,255,255,0.15)",
-                borderRadius: "2px 2px 6px 6px",
-                background: "linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(100,150,200,0.12))",
-              }}
-            >
-              {/* Coffee liquid */}
-              <div
-                className="absolute bottom-0 inset-x-0 h-3/4 rounded-b-md"
-                style={{
-                  background: "linear-gradient(to bottom, rgba(120,70,20,0.55), rgba(60,30,5,0.75))",
-                }}
-              />
-              {/* Foam */}
-              <div
-                className="absolute top-5 inset-x-1 h-2 rounded-sm opacity-70"
-                style={{ background: "linear-gradient(to right, rgba(200,150,80,0.5), rgba(240,200,120,0.4))" }}
-              />
-              {/* Ice cube 1 */}
-              <div
-                className="absolute top-2 left-1.5 w-3.5 h-3.5 rotate-12"
-                style={{
-                  background: "rgba(200,230,255,0.25)",
-                  border: "1px solid rgba(255,255,255,0.3)",
-                  borderRadius: "2px",
-                }}
-              />
-              {/* Ice cube 2 */}
-              <div
-                className="absolute top-3 right-1 w-3 h-3 -rotate-6"
-                style={{
-                  background: "rgba(180,220,255,0.2)",
-                  border: "1px solid rgba(255,255,255,0.25)",
-                  borderRadius: "2px",
-                }}
-              />
-              {/* Straw */}
-              <div
-                className="absolute right-4 -top-3 w-0.5 h-10"
-                style={{ background: "linear-gradient(to bottom, #e8a44a, #c87020)", borderRadius: "2px" }}
-              />
-            </div>
-            {/* Condensation */}
-            <div className="absolute -left-0.5 top-5 w-0.5 h-2 rounded-full bg-white/20" />
-            <div className="absolute -left-0.5 top-9 w-0.5 h-1.5 rounded-full bg-white/15" />
-            <div className="absolute -right-0.5 top-7 w-0.5 h-2.5 rounded-full bg-white/20" />
-          </div>
-        </div>
         {/* Bottom gradient on image area */}
-        <div className="absolute inset-x-0 bottom-0 h-6 bg-linear-to-t from-black/30 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-black/70 to-transparent" />
       </div>
 
       {/* Content */}
