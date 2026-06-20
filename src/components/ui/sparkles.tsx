@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
+import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface Particle {
@@ -34,6 +35,7 @@ export const SparklesCore = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>(0);
+  const reducedMotion = useReducedMotion();
 
   const initParticles = useCallback(() => {
     const canvas = canvasRef.current;
@@ -65,6 +67,19 @@ export const SparklesCore = ({
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
+
+    if (reducedMotion) {
+      // Statik tek kare çiz, sürekli animasyon döngüsü başlatma
+      particlesRef.current.forEach((p) => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, p.opacity * 0.5);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      return () => ro.disconnect();
+    }
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -102,7 +117,7 @@ export const SparklesCore = ({
       cancelAnimationFrame(animationRef.current);
       ro.disconnect();
     };
-  }, [background, initParticles, speed]);
+  }, [background, initParticles, speed, reducedMotion]);
 
   return (
     <canvas

@@ -1,6 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { AnnouncementBar } from "@/components/ui/announcement-bar";
 import { StickyActions } from "@/components/ui/sticky-actions";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { InfoBar } from "@/components/sections/info-bar";
@@ -16,6 +17,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
   return (
     <>
+      <ScrollProgress />
       <AnnouncementBar />
       <Navbar />
       {/* pb-20 = mobile sticky bar için alan */}

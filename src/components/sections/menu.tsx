@@ -323,20 +323,30 @@ export function Menu() {
           transition={{ delay: 0.3 }}
           className="flex flex-wrap justify-center gap-2 mb-12"
         >
-          {categoryTabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm transition-all duration-200 ${
-                activeTab === tab.id
-                  ? "bg-brand-600 text-white shadow-lg shadow-brand-600/25"
-                  : "bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              <span className="text-base leading-none">{tab.emoji}</span>
-              <span>{tab.label}</span>
-            </button>
-          ))}
+          {categoryTabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`relative flex items-center gap-1.5 px-4 py-2 rounded-full text-sm transition-colors duration-200 ${
+                  isActive
+                    ? "text-white"
+                    : "bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="menu-tab-pill"
+                    className="absolute inset-0 rounded-full bg-brand-600 shadow-lg shadow-brand-600/25"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 text-base leading-none">{tab.emoji}</span>
+                <span className="relative z-10">{tab.label}</span>
+              </button>
+            );
+          })}
         </motion.div>
 
         <motion.div

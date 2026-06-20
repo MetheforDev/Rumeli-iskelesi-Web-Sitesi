@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { SparklesCore } from "@/components/ui/sparkles";
@@ -103,7 +103,8 @@ export function Hero() {
   const t = useTranslations("hero");
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  const reducedMotion = useReducedMotion();
+  const contentY = useTransform(scrollYProgress, [0, 1], reducedMotion ? ["0%", "0%"] : ["0%", "25%"]);
   const opacityScroll = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -138,11 +139,11 @@ export function Hero() {
           key={currentIdx}
           className="absolute inset-0"
           initial={{ opacity: 0, scale: 1.0 }}
-          animate={{ opacity: 1, scale: 1.08 }}
+          animate={{ opacity: 1, scale: reducedMotion ? 1.0 : 1.08 }}
           exit={{ opacity: 0 }}
           transition={{
             opacity: { duration: 1.4, ease: "easeInOut" },
-            scale: { duration: 8, ease: "linear" },
+            scale: { duration: 8, ease: "easeOut" },
           }}
         >
           <Image

@@ -14,6 +14,33 @@ const LOCALES = [
   { code: "el", label: "EL", flag: "🇬🇷" },
 ];
 
+const SECTION_IDS = ["hero", "menu", "gallery", "contact"];
+
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState(ids[0]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const mostVisible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (mostVisible) setActive(mostVisible.target.id);
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [ids]);
+
+  return active;
+}
+
 function LanguageSwitcher() {
   const locale = useLocale();
   const router = useRouter();
@@ -86,6 +113,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { scrollY } = useScroll();
   const t = useTranslations("navbar");
+  const activeSection = useActiveSection(SECTION_IDS);
 
   useEffect(() => {
     scrollY.on("change", () => {});
@@ -94,10 +122,10 @@ export function Navbar() {
   const opacity = useTransform(scrollY, [0, 100], [0, 0.95]);
 
   const navItems = [
-    { label: t("home"), href: "#hero" },
-    { label: t("menu"), href: "#menu" },
-    { label: t("gallery"), href: "#gallery" },
-    { label: t("contact"), href: "#contact" },
+    { id: "hero", label: t("home"), href: "#hero" },
+    { id: "menu", label: t("menu"), href: "#menu" },
+    { id: "gallery", label: t("gallery"), href: "#gallery" },
+    { id: "contact", label: t("contact"), href: "#contact" },
   ];
 
   return (
@@ -127,22 +155,36 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden md:flex items-center gap-8">
-          {navItems.map((item, i) => (
-            <motion.li
-              key={item.href}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + i * 0.07 }}
-            >
-              <a
-                href={item.href}
-                className="text-sm text-zinc-400 hover:text-white transition-colors duration-200 relative group"
+          {navItems.map((item, i) => {
+            const isActive = activeSection === item.id;
+            return (
+              <motion.li
+                key={item.href}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.07 }}
+                className="relative"
               >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-brand-400 group-hover:w-full transition-all duration-300" />
-              </a>
-            </motion.li>
-          ))}
+                <a
+                  href={item.href}
+                  className={cn(
+                    "text-sm transition-colors duration-200 relative group",
+                    isActive ? "text-white" : "text-zinc-400 hover:text-white"
+                  )}
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-brand-400 group-hover:w-full transition-all duration-300" />
+                </a>
+                {isActive && (
+                  <motion.div
+                    layoutId="navbar-active-pill"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-brand-400"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </motion.li>
+            );
+          })}
         </ul>
 
         {/* Right side: Belediye logo + Language switcher */}
