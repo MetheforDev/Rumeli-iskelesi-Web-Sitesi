@@ -15,13 +15,13 @@ export function HoverCard({
       whileHover={{ y: -8, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={cn(
-        "group relative overflow-hidden rounded-2xl bg-zinc-900/80 backdrop-blur-sm",
-        "border border-white/5 shadow-lg hover:shadow-brand-500/20 hover:border-brand-500/30",
+        "group relative overflow-hidden rounded-2xl bg-zinc-900/90 backdrop-blur-sm",
+        "border border-white/10 shadow-lg hover:shadow-brand-500/20 hover:border-brand-500/30",
         "transition-shadow duration-300",
         className
       )}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-linear-to-br from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       {children}
     </motion.div>
   );

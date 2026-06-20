@@ -6,6 +6,7 @@ import Image from "next/image";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { Lightbox } from "@/components/ui/lightbox";
 import { useTranslations } from "next-intl";
+import { SectionGlow } from "@/components/ui/section-glow";
 
 type GalleryItem = {
   id: number;
@@ -152,7 +153,8 @@ export function Gallery() {
   const imageItems = galleryItems.filter((i) => i.type === "image");
 
   return (
-    <section id="gallery" ref={sectionRef} className="py-32 px-6 bg-[#050505] relative">
+    <section id="gallery" ref={sectionRef} className="py-32 px-6 bg-[#050505] relative overflow-hidden">
+      <SectionGlow color="teal" position="bottom-left" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
 
       <div className="max-w-6xl mx-auto">

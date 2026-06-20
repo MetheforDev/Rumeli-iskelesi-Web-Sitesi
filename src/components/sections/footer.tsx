@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { SectionGlow } from "@/components/ui/section-glow";
 
 export function Footer() {
   const ref = useRef(null);
@@ -11,7 +12,8 @@ export function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer id="contact" ref={ref} className="py-24 px-6 bg-[#030303] relative">
+    <footer id="contact" ref={ref} className="py-24 px-6 bg-[#030303] relative overflow-hidden">
+      <SectionGlow color="amber" position="top-right" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/30 to-transparent" />
 
       <div className="max-w-6xl mx-auto">

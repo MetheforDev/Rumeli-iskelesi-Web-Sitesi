@@ -7,6 +7,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { HoverCard } from "@/components/ui/card-hover";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { useTranslations } from "next-intl";
+import { SectionGlow } from "@/components/ui/section-glow";
 
 const SITE_URL = "https://en.mutlukentmenu.com/qrmenu";
 
@@ -291,7 +292,9 @@ export function Menu() {
     activeTab === "tumu" ? menuData : menuData.filter((c) => c.id === activeTab);
 
   return (
-    <section id="menu" ref={sectionRef} className="py-32 px-6 bg-[#080808] relative">
+    <section id="menu" ref={sectionRef} className="py-32 px-6 bg-[#080808] relative overflow-hidden">
+      <SectionGlow color="amber" position="top-left" />
+      <SectionGlow color="teal" position="bottom-right" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/30 to-transparent" />
 
       <div className="max-w-5xl mx-auto">
@@ -332,7 +335,7 @@ export function Menu() {
                 className={`relative flex items-center gap-1.5 px-4 py-2 rounded-full text-sm transition-colors duration-200 ${
                   isActive
                     ? "text-white"
-                    : "bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white"
+                    : "bg-white/8 text-zinc-300 hover:bg-white/14 hover:text-white"
                 }`}
               >
                 {isActive && (
@@ -373,7 +376,7 @@ export function Menu() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1 }}
-          className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-8 p-8 rounded-2xl bg-white/3 border border-white/8"
+          className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-8 p-8 rounded-2xl bg-white/6 border border-white/12"
         >
           <div className="p-4 bg-white rounded-xl shadow-lg">
             <QRCodeSVG

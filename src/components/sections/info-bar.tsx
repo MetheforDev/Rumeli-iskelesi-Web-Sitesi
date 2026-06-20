@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { SectionGlow } from "@/components/ui/section-glow";
 
 const HOURS = { open: 9, close: 24 };
 
@@ -63,7 +64,8 @@ export function InfoBar() {
   ];
 
   return (
-    <section ref={ref} className="py-16 px-6 bg-[#0d0d0d] relative">
+    <section ref={ref} className="py-16 px-6 bg-[#0d0d0d] relative overflow-hidden">
+      <SectionGlow color="teal" position="bottom-right" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
 
       <div className="max-w-6xl mx-auto">
@@ -108,7 +110,7 @@ export function InfoBar() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="flex flex-col items-center text-center p-5 rounded-2xl bg-white/3 border border-white/5 hover:border-brand-600/20 transition-colors"
+              className="flex flex-col items-center text-center p-5 rounded-2xl bg-white/6 border border-white/10 hover:border-brand-600/30 transition-colors"
             >
               <span className="text-3xl mb-2">{s.icon}</span>
               <span className="text-xs text-zinc-600 uppercase tracking-wider mb-1">{s.label}</span>

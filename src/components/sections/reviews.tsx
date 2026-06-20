@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { useTranslations } from "next-intl";
+import { SectionGlow } from "@/components/ui/section-glow";
 
 const reviews = [
   {
@@ -71,7 +72,7 @@ function ReviewCard({ review, index }: { review: typeof reviews[0]; index: numbe
       initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="flex flex-col gap-3 p-5 rounded-2xl bg-white/3 border border-white/5 hover:border-brand-600/20 transition-colors"
+      className="flex flex-col gap-3 p-5 rounded-2xl bg-white/6 border border-white/10 hover:border-brand-600/30 transition-colors"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -106,7 +107,8 @@ export function Reviews() {
   const avg = (reviews.reduce((a, r) => a + r.rating, 0) / reviews.length).toFixed(1);
 
   return (
-    <section ref={sectionRef} className="py-24 px-6 bg-[#0a0a0a] relative">
+    <section ref={sectionRef} className="py-24 px-6 bg-[#0a0a0a] relative overflow-hidden">
+      <SectionGlow color="gold" position="top-center" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
@@ -124,7 +126,7 @@ export function Reviews() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.5 }}
-            className="inline-flex items-center gap-3 mt-6 px-6 py-3 rounded-2xl bg-white/3 border border-white/8"
+            className="inline-flex items-center gap-3 mt-6 px-6 py-3 rounded-2xl bg-white/6 border border-white/12"
           >
             <span className="text-4xl font-bold text-white">{avg}</span>
             <div className="flex flex-col gap-1">

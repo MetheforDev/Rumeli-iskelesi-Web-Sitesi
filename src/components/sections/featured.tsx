@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { useTranslations } from "next-intl";
+import { SectionGlow } from "@/components/ui/section-glow";
 
 type FeaturedItem = {
   name: string;
@@ -120,6 +121,7 @@ export function Featured() {
 
   return (
     <section ref={sectionRef} className="py-20 bg-[#080808] relative overflow-hidden">
+      <SectionGlow color="amber" position="top-left" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
 
       <div className="max-w-6xl mx-auto px-6 mb-10">
