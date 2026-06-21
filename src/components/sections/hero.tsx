@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 type HeroImage = { src: string; alt: string; duration?: number };
 
 const DEFAULT_SLIDE_MS = 5500;
+const PROGRESS_TICK_MS = 50;
 
 const HERO_IMAGES: HeroImage[] = [
   { src: "/images/hero/rumeli-drone-cekim.jpg", alt: "Rumeli İskelesi Drone Çekim", duration: 18000 },
@@ -117,7 +118,7 @@ export function Hero() {
     const start = Date.now();
     const progressInterval = setInterval(() => {
       setSlideProgress(Math.min((Date.now() - start) / slideDuration, 1));
-    }, 50);
+    }, PROGRESS_TICK_MS);
     const slideTimeout = setTimeout(() => {
       setCurrentIdx((prev) => (prev + 1) % HERO_IMAGES.length);
     }, slideDuration);
@@ -201,7 +202,7 @@ export function Hero() {
               key={i}
               onClick={() => setCurrentIdx(i)}
               aria-label={`Görsel ${i + 1}`}
-              className="relative h-0.5 rounded-full overflow-hidden transition-all duration-300"
+              className="relative h-0.5 rounded-full overflow-hidden transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
               style={{
                 width: i === currentIdx ? 28 : 10,
                 background: "rgba(255,255,255,0.22)",

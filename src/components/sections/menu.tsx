@@ -367,7 +367,7 @@ export function Menu() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8 }}
-          className="mt-6 text-center text-xs text-zinc-700"
+          className="mt-6 text-center text-xs text-zinc-500"
         >
           {t("allergen_note")}
         </motion.p>

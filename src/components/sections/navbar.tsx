@@ -16,6 +16,11 @@ const LOCALES = [
 
 const SECTION_IDS = ["hero", "menu", "gallery", "contact"];
 
+// Bölüm yalnızca ekranın orta %20'lik şeridinden geçerken aktif sayılır —
+// üst/alttaki bölümler henüz tam görünür olmadan erken tetiklenmeyi önler.
+const ACTIVE_SECTION_ROOT_MARGIN = "-40% 0px -40% 0px";
+const ACTIVE_SECTION_THRESHOLDS = [0, 0.25, 0.5, 0.75, 1];
+
 function useActiveSection(ids: string[]) {
   const [active, setActive] = useState(ids[0]);
 
@@ -27,7 +32,7 @@ function useActiveSection(ids: string[]) {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (mostVisible) setActive(mostVisible.target.id);
       },
-      { rootMargin: "-40% 0px -40% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+      { rootMargin: ACTIVE_SECTION_ROOT_MARGIN, threshold: ACTIVE_SECTION_THRESHOLDS }
     );
 
     const elements = ids
