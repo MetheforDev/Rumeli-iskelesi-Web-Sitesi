@@ -67,15 +67,25 @@ function getWeatherIcon(code: number): string {
   return WEATHER_ICONS[code] ?? "🌤️";
 }
 
+const FETCH_TIMEOUT_MS = 6000;
+
 export function WeatherWidget() {
   const t = useTranslations("weather");
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("https://wttr.in/Tekirdag?format=j1")
-      .then((r) => r.json())
+    let cancelled = false;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+    fetch("https://wttr.in/Tekirdag?format=j1", { signal: controller.signal })
+      .then((r) => {
+        if (!r.ok) throw new Error(`wttr.in HTTP ${r.status}`);
+        return r.json();
+      })
       .then((data) => {
+        if (cancelled) return;
         const c = data.current_condition[0];
         setWeather({
           tempC: Number(c.temp_C),
@@ -85,7 +95,16 @@ export function WeatherWidget() {
           code: Number(c.weatherCode),
         });
       })
-      .catch(() => setError(true));
+      .catch(() => {
+        if (!cancelled) setError(true);
+      })
+      .finally(() => clearTimeout(timeoutId));
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeoutId);
+      controller.abort();
+    };
   }, []);
 
   if (error) return null;
