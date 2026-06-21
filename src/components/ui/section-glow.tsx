@@ -2,7 +2,6 @@ const GLOW_COLORS = {
   amber: "rgba(217,137,42,0.16)",
   teal: "rgba(45,170,175,0.14)",
   gold: "rgba(244,197,106,0.14)",
-  rose: "rgba(217,110,90,0.12)",
 } as const;
 
 const POSITIONS = {

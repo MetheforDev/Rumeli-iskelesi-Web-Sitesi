@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { SITE_URL, LOCALES, LOCALE_OG, type Locale } from "./site-config";
+import { SITE_URL, LOCALES, LOCALE_OG, NAP, type Locale } from "./site-config";
 
 export async function generateSeoMetadata(locale: Locale): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "seo" });
@@ -25,7 +25,7 @@ export async function generateSeoMetadata(locale: Locale): Promise<Metadata> {
       siteName: "Rumeli İskelesi",
       images: [
         {
-          url: `${SITE_URL}/images/hero/rumeli-cam.jpg`,
+          url: `${SITE_URL}${NAP.heroImage}`,
           width: 1200,
           height: 630,
           alt: t("og_image_alt"),
