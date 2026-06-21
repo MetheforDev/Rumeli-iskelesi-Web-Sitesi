@@ -147,6 +147,7 @@ export function Navbar() {
               src="/images/logo/rumeli-logo-transparent.png"
               alt="Rumeli İskelesi"
               fill
+              sizes="144px"
               className="object-contain object-left"
               priority
             />
@@ -196,6 +197,7 @@ export function Navbar() {
                 src="/images/logo/suleymanpasa-yuvarlak-transparent.png"
                 alt="Süleymanpaşa Belediyesi"
                 fill
+                sizes="36px"
                 className="object-contain"
               />
             </div>

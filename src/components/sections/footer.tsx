@@ -30,6 +30,7 @@ export function Footer() {
                 src="/images/logo/rumeli-logo-transparent.png"
                 alt="Rumeli İskelesi"
                 fill
+                sizes="192px"
                 className="object-contain object-left"
               />
             </div>
@@ -42,6 +43,7 @@ export function Footer() {
                   src="/images/logo/suleymanpasa-yuvarlak-transparent.png"
                   alt="Süleymanpaşa Belediyesi"
                   fill
+                  sizes="40px"
                   className="object-contain"
                 />
               </div>
@@ -50,6 +52,7 @@ export function Footer() {
                   src="/images/logo/suleymanpasa-yazili-transparent.png"
                   alt="Süleymanpaşa Belediyesi"
                   fill
+                  sizes="144px"
                   className="object-contain object-left"
                 />
               </div>
