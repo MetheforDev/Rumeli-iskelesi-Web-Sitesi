@@ -10,7 +10,6 @@ import { useTranslations } from "next-intl";
 type HeroImage = { src: string; alt: string; duration?: number };
 
 const DEFAULT_SLIDE_MS = 5500;
-const PROGRESS_TICK_MS = 50;
 
 const HERO_IMAGES: HeroImage[] = [
   { src: "/images/hero/rumeli-drone-cekim.jpg", alt: "Rumeli İskelesi Drone Çekim", duration: 18000 },
@@ -100,6 +99,19 @@ function DesktopPromoCard() {
   );
 }
 
+// İlerleme çubuğu genişliğini Framer Motion'ın kendi animasyon motoruyla çizer
+// (her 50ms'de React state güncelleyip tüm Hero ağacını yeniden render etmek yerine).
+function SlideProgressBar({ durationMs }: { durationMs: number }) {
+  return (
+    <motion.div
+      className="absolute inset-y-0 left-0 bg-brand-400 rounded-full"
+      initial={{ width: "0%" }}
+      animate={{ width: "100%" }}
+      transition={{ duration: durationMs / 1000, ease: "linear" }}
+    />
+  );
+}
+
 export function Hero() {
   const t = useTranslations("hero");
   const ref = useRef<HTMLElement>(null);
@@ -109,23 +121,14 @@ export function Hero() {
   const opacityScroll = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [slideProgress, setSlideProgress] = useState(0);
 
   useEffect(() => {
     if (HERO_IMAGES.length <= 1) return;
-    setSlideProgress(0);
     const slideDuration = HERO_IMAGES[currentIdx].duration ?? DEFAULT_SLIDE_MS;
-    const start = Date.now();
-    const progressInterval = setInterval(() => {
-      setSlideProgress(Math.min((Date.now() - start) / slideDuration, 1));
-    }, PROGRESS_TICK_MS);
     const slideTimeout = setTimeout(() => {
       setCurrentIdx((prev) => (prev + 1) % HERO_IMAGES.length);
     }, slideDuration);
-    return () => {
-      clearInterval(progressInterval);
-      clearTimeout(slideTimeout);
-    };
+    return () => clearTimeout(slideTimeout);
   }, [currentIdx]);
 
   return (
@@ -209,10 +212,7 @@ export function Hero() {
               }}
             >
               {i === currentIdx && (
-                <motion.div
-                  className="absolute inset-y-0 left-0 bg-brand-400 rounded-full"
-                  style={{ width: `${slideProgress * 100}%` }}
-                />
+                <SlideProgressBar durationMs={HERO_IMAGES[i].duration ?? DEFAULT_SLIDE_MS} />
               )}
             </button>
           ))}
