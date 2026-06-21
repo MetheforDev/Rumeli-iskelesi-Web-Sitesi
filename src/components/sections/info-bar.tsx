@@ -6,6 +6,22 @@ import { useTranslations } from "next-intl";
 import { SectionGlow } from "@/components/ui/section-glow";
 
 const HOURS = { open: 9, close: 24 };
+// İşletme saatleri Tekirdağ/İstanbul'a (UTC+3, DST yok) göredir — ziyaretçinin
+// tarayıcı saat dilimi farklı olsa da "açık/kapalı" durumu yanlış hesaplanmasın.
+const BUSINESS_TIMEZONE = "Europe/Istanbul";
+
+function getBusinessTotalMinutes(): number {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: BUSINESS_TIMEZONE,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+  let hour = Number(parts.find((p) => p.type === "hour")?.value ?? "0");
+  const minute = Number(parts.find((p) => p.type === "minute")?.value ?? "0");
+  if (hour === 24) hour = 0; // Bazı Intl motorları gece yarısını "24:00" döndürür
+  return hour * 60 + minute;
+}
 
 function useIsOpen(t: ReturnType<typeof useTranslations<"infobar">>) {
   const [status, setStatus] = useState<{ open: boolean; label: string; next: string }>({
@@ -16,8 +32,7 @@ function useIsOpen(t: ReturnType<typeof useTranslations<"infobar">>) {
 
   useEffect(() => {
     const update = () => {
-      const now = new Date();
-      const totalMin = now.getHours() * 60 + now.getMinutes();
+      const totalMin = getBusinessTotalMinutes();
       const openMin = HOURS.open * 60;
       const closeMin = HOURS.close >= 24 ? 1440 : HOURS.close * 60;
       const isOpen = totalMin >= openMin && totalMin < closeMin;
