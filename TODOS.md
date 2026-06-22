@@ -45,8 +45,11 @@ kapsam olarak işaretlenen işleri toplar.
 - [x] **Menü/galeri görsel yolu doğrulaması yok** — `scripts/check-image-paths.mjs`
       tüm `/images/...` referanslarını `public/` ile karşılaştırıp `prebuild`'de
       doğruluyor. Çözüldü.
-- [ ] **Bilgi hiyerarşisi** — Hero → InfoBar → Featured → Menu → Reviews →
-      Gallery → Footer sırası, "şu an açık mı + ne yiyeyim + nasıl giderim"
-      arayan acil mobil ziyaretçi için harita/yol tarifini 7 bölüm sona
-      atıyor. Featured'ın Menu'ye katılması + yol tarifi CTA'sının yukarı
-      alınması önerildi.
+- [x] **Bilgi hiyerarşisi — yol tarifi erişimi** — ağır Google Maps iframe'i
+      Footer'da kalmaya devam ediyor (hero'nun sinematik görsel diliyle
+      çakışmaması için taşınmadı), ama erişim hızı çözüldü: `StickyActions`
+      artık 300px scroll beklemeden sayfa açılır açılmaz görünüyor (mobil),
+      `InfoBar`'daki "📍 Konum" kartı artık doğrudan `NAP.googleMapsUrl`'e
+      tıklanabilir link. Acil ziyaretçi scroll etmeden yol tarifine ulaşıyor.
+      Featured/Menu birleşmesi ayrı, görsel etkisi daha büyük bir karar —
+      ayrıca ele alınabilir.

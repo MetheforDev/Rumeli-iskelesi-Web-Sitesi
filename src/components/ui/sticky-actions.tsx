@@ -1,18 +1,13 @@
 "use client";
 
-import { motion, useScroll } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
+// Acil ihtiyacı olan ziyaretçi (yol tarifi vb.) 300px scroll bekletilmeden
+// erişebilsin diye bar sayfa açılır açılmaz görünür — sadece hero'nun giriş
+// animasyonları bittikten sonra (delay) belirir, anında çakışma olmasın.
 export function StickyActions() {
-  const [visible, setVisible] = useState(false);
-  const { scrollY } = useScroll();
   const t = useTranslations("sticky");
-
-  useEffect(() => {
-    const unsub = scrollY.on("change", (v) => setVisible(v > 300));
-    return unsub;
-  }, [scrollY]);
 
   const actions = [
     {
@@ -51,8 +46,8 @@ export function StickyActions() {
   return (
     <motion.div
       initial={{ y: 100, opacity: 0 }}
-      animate={{ y: visible ? 0 : 100, opacity: visible ? 1 : 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30, delay: 1.5 }}
       className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
     >
       <div className="bg-black/90 backdrop-blur-xl border-t border-white/10 px-4 py-3 pb-safe">

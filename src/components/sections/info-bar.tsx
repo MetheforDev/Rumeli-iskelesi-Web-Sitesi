@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { SectionGlow } from "@/components/ui/section-glow";
+import { NAP } from "@/lib/site-config";
 
 const HOURS = { open: 9, close: 24 };
 // İşletme saatleri Tekirdağ/İstanbul'a (UTC+3, DST yok) göredir — ziyaretçinin
@@ -72,7 +73,7 @@ export function InfoBar() {
   const status = useIsOpen(t);
 
   const stats = [
-    { icon: "📍", label: t("location_label"), value: t("location_value"), sub: t("location_sub") },
+    { icon: "📍", label: t("location_label"), value: t("location_value"), sub: t("location_sub"), href: NAP.googleMapsUrl },
     { icon: "🕐", label: t("hours_label"), value: t("hours_value"), sub: t("hours_sub") },
     { icon: "👥", label: t("capacity_label"), value: t("capacity_value"), sub: t("capacity_sub") },
     { icon: "🏛️", label: t("business_label"), value: t("business_value"), sub: t("business_sub") },
@@ -119,20 +120,48 @@ export function InfoBar() {
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="flex flex-col items-center text-center p-5 rounded-2xl bg-white/6 border border-white/10 hover:border-brand-600/30 transition-colors"
-            >
-              <span className="text-3xl mb-2">{s.icon}</span>
-              <span className="text-xs text-zinc-600 uppercase tracking-wider mb-1">{s.label}</span>
-              <span className="text-white font-semibold text-sm">{s.value}</span>
-              <span className="text-zinc-500 text-xs mt-0.5">{s.sub}</span>
-            </motion.div>
-          ))}
+          {stats.map((s, i) => {
+            const content = (
+              <>
+                <span className="text-3xl mb-2">{s.icon}</span>
+                <span className="text-xs text-zinc-600 uppercase tracking-wider mb-1 inline-flex items-center gap-1">
+                  {s.label}
+                  {s.href && (
+                    <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  )}
+                </span>
+                <span className="text-white font-semibold text-sm">{s.value}</span>
+                <span className="text-zinc-500 text-xs mt-0.5">{s.sub}</span>
+              </>
+            );
+
+            return s.href ? (
+              <motion.a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.45, delay: i * 0.08 }}
+                className="flex flex-col items-center text-center p-5 rounded-2xl bg-white/6 border border-white/10 hover:border-brand-600/40 hover:bg-white/10 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+              >
+                {content}
+              </motion.a>
+            ) : (
+              <motion.div
+                key={s.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.45, delay: i * 0.08 }}
+                className="flex flex-col items-center text-center p-5 rounded-2xl bg-white/6 border border-white/10 hover:border-brand-600/30 transition-colors"
+              >
+                {content}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
