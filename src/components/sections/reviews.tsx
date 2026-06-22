@@ -5,42 +5,54 @@ import { useRef } from "react";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { useTranslations } from "next-intl";
 import { SectionGlow } from "@/components/ui/section-glow";
+import { NAP } from "@/lib/site-config";
+
+// Google İşletme Profili'nden alınan gerçek yorumlar (genel puan: 4.4 · 806 yorum)
+const GOOGLE_RATING = 4.4;
+const GOOGLE_REVIEW_COUNT = 806;
 
 const reviews = [
   {
-    name: "Ahmet Y.",
+    name: "M-Byn",
     rating: 5,
     date: "1 hafta önce",
-    text: "Tekirdağ'ın en güzel manzarasında kahvaltı yaptık. Serpme kahvaltı muhteşemdi, personel çok ilgiliydi. Kesinlikle tavsiye ederim!",
-    avatar: "A",
-  },
-  {
-    name: "Elif K.",
-    rating: 5,
-    date: "2 hafta önce",
-    text: "Rumeli İskelesi'nde Tekirdağ köftesi yedik, gerçekten enfes. Deniz manzarası eşliğinde yemek ayrı bir keyif. Fiyatlar da çok uygun.",
-    avatar: "E",
-  },
-  {
-    name: "Murat D.",
-    rating: 5,
-    date: "3 hafta önce",
-    text: "San Sebastian tatlısı harika! Belediye işletmesi olmasına rağmen kalite ve servis çok üst düzey. Her hafta geliyoruz artık.",
+    text: "Manzara ve yemekler çok güzeldi. Kahvaltı için geldik, seçenek çok bol değil ama fiyatlar uygundu. Self-servis kendiniz alıyorsunuz. Belediyeyi tebrik ediyorum.",
     avatar: "M",
   },
   {
-    name: "Selin A.",
+    name: "Murat",
     rating: 5,
-    date: "1 ay önce",
-    text: "Hamburgerleri gerçekten lezzetli. Soğuk kahveler de çok güzel. Deniz kenarında oturarak yemek yemek ayrı bir deneyim.",
-    avatar: "S",
+    date: "2 hafta önce",
+    text: "Rumeli iskelesi gayet güzel bir yer iki çay bahçesi dondurma satan ayrı bir işletmesi balık ekmek satan bir işletmeyi ve kadın komisyonuna bağlı el emeği ürünlerin satıldığı yerleri bünyesinde barındırıyor balık tutulabilen alanlarıda var çay bahçelerindeki bir olumsuzluk self servis olması çok oturmayalım diye galiba :) dandik sandalyeler konmuş",
+    avatar: "M",
   },
   {
-    name: "Kemal B.",
+    name: "ismail81",
     rating: 5,
-    date: "1 ay önce",
-    text: "Ailecek geliyoruz. Çocuklar dondurmaları çok seviyor. Temiz, bakımlı ve huzurlu bir mekan. Tekirdağ'ın incisi.",
-    avatar: "K",
+    date: "3 hafta önce",
+    text: "Bulunduğu konum harika. Ayrıca iskelenin en son kısmında belediye ait bir sosyal tesis olduğu için de muhteşem geç saatlere kadar açık çalışanlarda ellerinden geldiği kadar özverili bir şekilde herkesi yetişmeye çalışıyor tatil zamanları çok yoğun çok eşek olan bir yer bu bölgeye gelip de mutlaka uğranması gereken bir yer",
+    avatar: "İ",
+  },
+  {
+    name: "Engin Sunal",
+    rating: 5,
+    date: "7 hafta önce",
+    text: "Ailenizle birlikte gidip denizin dibinde vakit geçirebileceğiniz güzel bir mekan. Hem denizin keyfini çıkarabilir hem de uygun fiyatlı bir şekilde yiyip içebilirsiniz. Bu gibi güzel manzaralı alanları halka kazandırdığı için Tekirdağ belediyesini tebrik ederim. Diğer belediyelere örnek olması dileğiyle.",
+    avatar: "E",
+  },
+  {
+    name: "Levent İvecan",
+    rating: 5,
+    date: "20 hafta önce",
+    text: "Örnek olması gereken Belediyeye ait bir işletme. Denizin ortasında makul fiyatlı, sevdiklerinizle hoşça vakit geçirebileceğiniz bir mekan.",
+    avatar: "L",
+  },
+  {
+    name: "Ece",
+    rating: 5,
+    date: "29 hafta önce",
+    text: "Tekirdağlılar için sahil yürüyüşü sonrası dinlenmek için harika bir seçenek. Uygun fiyat, self servis, haftasonu sabah saatlerinde genelde tenha oluyor. Kahvaltı, tost, karadut (bizim favorimiz), çay, meşrubatlar vs. birçok seçenek mevcut. 🌊⛴️🍽️☕",
+    avatar: "E",
   },
 ];
 
@@ -104,7 +116,6 @@ export function Reviews() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
   const t = useTranslations("reviews");
-  const avg = (reviews.reduce((a, r) => a + r.rating, 0) / reviews.length).toFixed(1);
 
   return (
     <section ref={sectionRef} className="py-24 px-6 bg-[#0a0a0a] relative overflow-hidden">
@@ -128,10 +139,10 @@ export function Reviews() {
             transition={{ delay: 0.5 }}
             className="inline-flex items-center gap-3 mt-6 px-6 py-3 rounded-2xl bg-white/6 border border-white/12"
           >
-            <span className="text-4xl font-bold text-white">{avg}</span>
+            <span className="text-4xl font-bold text-white">{GOOGLE_RATING.toFixed(1)}</span>
             <div className="flex flex-col gap-1">
               <Stars count={5} />
-              <span className="text-zinc-500 text-xs">{t("count", { count: reviews.length })}</span>
+              <span className="text-zinc-500 text-xs">{t("count", { count: GOOGLE_REVIEW_COUNT })}</span>
             </div>
           </motion.div>
         </div>
@@ -149,7 +160,7 @@ export function Reviews() {
           className="mt-8 text-center"
         >
           <a
-            href="https://www.google.com/maps/search/Rumeli+İskelesi+Süleymanpaşa"
+            href={NAP.googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-white transition-colors"
