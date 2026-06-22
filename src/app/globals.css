@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-50: #fdf8f0;
+  --color-brand-100: #faefd8;
+  --color-brand-200: #f4dab0;
+  --color-brand-300: #ecc07e;
+  --color-brand-400: #e3a04a;
+  --color-brand-500: #d9892a;
+  --color-brand-600: #c4701f;
+  --color-brand-700: #a3561b;
+  --color-brand-800: #83451d;
+  --color-brand-900: #6b3a1b;
+  --color-brand-950: #3a1d0a;
+  --color-brand-gold: #f4c56a;
+  --color-brand-teal: #2daaaf;
+}
+
 @layer base {
   :root {
     --background: 0 0% 3%;
@@ -31,7 +47,7 @@
   }
 
   ::selection {
-    background: #d9892a40;
+    background: color-mix(in srgb, var(--color-brand-500) 25%, transparent);
     color: #fff;
   }
 
@@ -44,18 +60,18 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #d9892a60;
+    background: color-mix(in srgb, var(--color-brand-500) 38%, transparent);
     border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #d9892a;
+    background: var(--color-brand-500);
   }
 }
 
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(135deg, #d9892a, #f4c56a, #d9892a);
+    background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-gold), var(--color-brand-500));
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { WeatherWidget } from "@/components/ui/weather-widget";
 import { useTranslations } from "next-intl";
+import { BRAND_HEX } from "@/lib/colors";
 
 type HeroImage = { src: string; alt: string; duration?: number };
 
@@ -34,7 +35,7 @@ function MobilePromoPill() {
         <span
           className="font-black"
           style={{
-            background: "linear-gradient(135deg, #d9892a, #f4c56a)",
+            background: "linear-gradient(135deg, var(--color-brand-500), var(--color-brand-gold))",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -85,7 +86,7 @@ function DesktopPromoCard() {
         <p
           className="font-black text-xl leading-tight mt-0.5"
           style={{
-            background: "linear-gradient(135deg, #d9892a, #f4c56a)",
+            background: "linear-gradient(135deg, var(--color-brand-500), var(--color-brand-gold))",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -180,7 +181,7 @@ export function Hero() {
           minSize={0.4}
           maxSize={1.1}
           particleDensity={35}
-          particleColor="#d9892a"
+          particleColor={BRAND_HEX.primary}
           speed={0.4}
           className="w-full h-full"
         />
@@ -259,7 +260,7 @@ export function Hero() {
           <span
             className="block"
             style={{
-              background: "linear-gradient(135deg, #d9892a, #f4c56a, #d9892a)",
+              background: "linear-gradient(135deg, var(--color-brand-500), var(--color-brand-gold), var(--color-brand-500))",
               backgroundSize: "200% auto",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -349,7 +350,7 @@ export function Hero() {
               <span
                 className="text-2xl md:text-3xl font-bold"
                 style={{
-                  background: "linear-gradient(135deg, #d9892a, #f4c56a)",
+                  background: "linear-gradient(135deg, var(--color-brand-500), var(--color-brand-gold))",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",

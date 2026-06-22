@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { BRAND_HEX } from "@/lib/colors";
 
 export function HoverCard({
   children,
@@ -30,7 +31,7 @@ export function HoverCard({
 export function GlowCard({
   children,
   className,
-  glowColor = "#d9892a",
+  glowColor = BRAND_HEX.primary,
 }: {
   children: React.ReactNode;
   className?: string;

@@ -1,7 +1,8 @@
+// globals.css'teki @theme renk token'larına bağlı — ayrı bir renk kaynağı değil.
 const GLOW_COLORS = {
-  amber: "rgba(217,137,42,0.16)",
-  teal: "rgba(45,170,175,0.14)",
-  gold: "rgba(244,197,106,0.14)",
+  amber: "color-mix(in srgb, var(--color-brand-500) 16%, transparent)",
+  teal: "color-mix(in srgb, var(--color-brand-teal) 14%, transparent)",
+  gold: "color-mix(in srgb, var(--color-brand-gold) 14%, transparent)",
 } as const;
 
 const POSITIONS = {

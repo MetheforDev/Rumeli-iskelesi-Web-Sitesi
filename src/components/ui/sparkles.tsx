@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { BRAND_HEX } from "@/lib/colors";
 
 interface Particle {
   id: number;
@@ -20,7 +21,7 @@ export const SparklesCore = ({
   minSize = 0.4,
   maxSize = 1,
   speed = 1,
-  particleColor = "#d9892a",
+  particleColor = BRAND_HEX.primary,
   className,
   particleDensity = 100,
 }: {

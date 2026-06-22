@@ -9,21 +9,8 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        brand: {
-          50: "#fdf8f0",
-          100: "#faefd8",
-          200: "#f4dab0",
-          300: "#ecc07e",
-          400: "#e3a04a",
-          500: "#d9892a",
-          600: "#c4701f",
-          700: "#a3561b",
-          800: "#83451d",
-          900: "#6b3a1b",
-          950: "#3a1d0a",
-        },
-      },
+      // Renk token'ları artık globals.css'teki @theme bloğunda
+      // (--color-brand-*) tanımlı — Tailwind v4 CSS-first config kuralı.
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         display: ["var(--font-playfair)", "Georgia", "serif"],

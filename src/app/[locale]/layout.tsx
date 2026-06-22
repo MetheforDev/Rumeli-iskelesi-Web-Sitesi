@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import { generateSeoMetadata } from "@/lib/seo";
 import { RestaurantJsonLd } from "@/components/seo/RestaurantJsonLd";
 import type { Locale } from "@/lib/site-config";
+import { BRAND_HEX } from "@/lib/colors";
 import "../globals.css";
 
 const inter = Inter({
@@ -55,7 +56,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
       <head>
         <RestaurantJsonLd locale={locale as Locale} />
-        <meta name="theme-color" content="#d9892a" />
+        <meta name="theme-color" content={BRAND_HEX.primary} />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Rumeli İskelesi" />
