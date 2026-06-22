@@ -21,19 +21,12 @@ kapsam olarak işaretlenen işleri toplar.
 
 ## Ertelenen (autoplan retrospektif — CEO/Tasarım/Mühendislik bulguları)
 
-- [ ] **Featured ↔ Menu veri tekrarı** — `featured.tsx`'teki `featuredItems` ve
-      `menu.tsx`'teki `menuData` aynı ürünleri (Tekirdağ Köftesi, ₺350 vb.)
-      bağımsız sabitler olarak tutuyor. Fiyat değişince ikisi de güncellenmeli,
-      hiçbir mekanizma bunu zorlamıyor. Hem tasarım hem mühendislik incelemesi
-      bağımsız olarak bu bulguyu işaretledi (cross-phase, yüksek güven).
-      Önerilen çözüm: `featuredItems`'ı `menuData`'dan id ile türet, ayrı
-      sabit tutma.
-- [ ] **Renk token mimarisi CLAUDE.md'yi ihlal ediyor** — CLAUDE.md
-      `@theme` blok zorunluluğu koyuyor ama marka renkleri `tailwind.config.ts`
-      (JS config, v3 alışkanlığı) + en az 7 dosyada hardcoded hex literal
-      (`#d9892a`, `#f4c56a`) + `SectionGlow`'un kendi RGBA haritası olarak
-      3 ayrı kaynakta yaşıyor. Rebrand/kontrast düzeltmesi gerektiğinde
-      grep-replace yerine tek `@theme` token'ı düzeltmek yeterli olmalı.
+- [x] **Featured ↔ Menu veri tekrarı** — `src/lib/menu-data.ts` tek kaynak
+      oldu, `featuredItems` artık `getMenuItem(id)` ile türetiliyor. Çözüldü.
+- [x] **Renk token mimarisi CLAUDE.md'yi ihlal ediyor** — renkler artık
+      `globals.css`'teki `@theme` bloğunda tek kaynak; `tailwind.config.ts`,
+      hardcoded hex literal'ler ve `SectionGlow`'un RGBA haritası kaldırıldı.
+      Çözüldü.
 - [ ] **gstack + OpenAI key oranlılık değerlendirmesi** — gstack "team mode"
       ile global zorunlu yapıldı (PreToolUse hook, Skill tool'unu bloklar)
       ve OpenAI API key kalıcı ortam değişkeni olarak eklendi. Hem CEO hem
