@@ -1,4 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
+import type { Locale } from "@/lib/site-config";
 import { AnnouncementBar } from "@/components/ui/announcement-bar";
 import { StickyActions } from "@/components/ui/sticky-actions";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
@@ -13,7 +14,7 @@ import { Footer } from "@/components/sections/footer";
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
 
   return (
     <>

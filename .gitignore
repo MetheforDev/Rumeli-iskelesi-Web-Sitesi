@@ -40,3 +40,6 @@ yarn-error.log*
 next-env.d.ts
 __pycache__/
 .gstack/
+
+# next-intl: build sırasında tr.json'dan otomatik üretilir (bkz. next.config.ts)
+messages/*.d.json.ts

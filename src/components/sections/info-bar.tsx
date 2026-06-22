@@ -44,7 +44,7 @@ function useIsOpen(t: ReturnType<typeof useTranslations<"infobar">>) {
         setStatus({
           open: true,
           label: t("open"),
-          next: h > 0 ? t("closes_in_h", { h, m }) : t("closes_in_m", { m }),
+          next: h > 0 ? t("closes_in_h", { h: String(h), m: String(m) }) : t("closes_in_m", { m: String(m) }),
         });
       } else {
         const minsUntilOpen = totalMin < openMin ? openMin - totalMin : openMin + 1440 - totalMin;
@@ -53,7 +53,7 @@ function useIsOpen(t: ReturnType<typeof useTranslations<"infobar">>) {
         setStatus({
           open: false,
           label: t("closed"),
-          next: h > 0 ? t("opens_in_h", { h, m }) : t("opens_in_m", { m }),
+          next: h > 0 ? t("opens_in_h", { h: String(h), m: String(m) }) : t("opens_in_m", { m: String(m) }),
         });
       }
     };

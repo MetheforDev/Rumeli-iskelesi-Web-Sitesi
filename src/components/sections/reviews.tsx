@@ -1,10 +1,7 @@
-"use client";
-
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { TextReveal } from "@/components/ui/text-reveal";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { SectionGlow } from "@/components/ui/section-glow";
+import { FadeInView } from "@/components/ui/fade-in-view";
 import { NAP } from "@/lib/site-config";
 
 // Google İşletme Profili'nden alınan gerçek yorumlar (genel puan: 4.4 · 806 yorum)
@@ -73,17 +70,19 @@ function Stars({ count }: { count: number }) {
   );
 }
 
-function ReviewCard({ review, index }: { review: typeof reviews[0]; index: number }) {
-  const t = useTranslations("reviews");
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
-
+function ReviewCard({
+  review,
+  index,
+  googleReviewLabel,
+}: {
+  review: (typeof reviews)[0];
+  index: number;
+  googleReviewLabel: string;
+}) {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
+    <FadeInView
+      delay={index * 0.08}
+      margin="-40px"
       className="flex flex-col gap-3 p-5 rounded-2xl bg-white/6 border border-white/10 hover:border-brand-600/30 transition-colors"
     >
       <div className="flex items-center justify-between">
@@ -106,59 +105,48 @@ function ReviewCard({ review, index }: { review: typeof reviews[0]; index: numbe
           <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
           <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
         </svg>
-        <span className="text-zinc-600 text-xs">{t("google_review")}</span>
+        <span className="text-zinc-600 text-xs">{googleReviewLabel}</span>
       </div>
-    </motion.div>
+    </FadeInView>
   );
 }
 
-export function Reviews() {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
-  const t = useTranslations("reviews");
+export async function Reviews() {
+  const t = await getTranslations("reviews");
+  const googleReviewLabel = t("google_review");
 
   return (
-    <section ref={sectionRef} className="py-24 px-6 bg-[#0a0a0a] relative overflow-hidden">
+    <section className="py-24 px-6 bg-[#0a0a0a] relative overflow-hidden">
       <SectionGlow color="gold" position="top-center" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-brand-600/30 text-brand-400 text-xs tracking-widest uppercase"
-          >
+          <FadeInView duration={0.3} y={0} className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-brand-600/30 text-brand-400 text-xs tracking-widest uppercase">
             {t("badge")}
-          </motion.div>
+          </FadeInView>
           <TextReveal text={t("title1")} className="justify-center text-3xl sm:text-4xl font-bold text-white mb-3" />
           <TextReveal text={t("title2")} delay={0.2} className="justify-center text-3xl sm:text-4xl font-bold" />
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.5 }}
+          <FadeInView
+            delay={0.5}
+            y={0}
             className="inline-flex items-center gap-3 mt-6 px-6 py-3 rounded-2xl bg-white/6 border border-white/12"
           >
             <span className="text-4xl font-bold text-white">{GOOGLE_RATING.toFixed(1)}</span>
             <div className="flex flex-col gap-1">
               <Stars count={5} />
-              <span className="text-zinc-500 text-xs">{t("count", { count: GOOGLE_REVIEW_COUNT })}</span>
+              <span className="text-zinc-500 text-xs">{t("count", { count: String(GOOGLE_REVIEW_COUNT) })}</span>
             </div>
-          </motion.div>
+          </FadeInView>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {reviews.map((r, i) => (
-            <ReviewCard key={r.name} review={r} index={i} />
+            <ReviewCard key={r.name} review={r} index={i} googleReviewLabel={googleReviewLabel} />
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.7 }}
-          className="mt-8 text-center"
-        >
+        <FadeInView delay={0.7} y={0} duration={0.3} className="mt-8 text-center">
           <a
             href={NAP.googleMapsUrl}
             target="_blank"
@@ -170,7 +158,7 @@ export function Reviews() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
           </a>
-        </motion.div>
+        </FadeInView>
       </div>
     </section>
   );

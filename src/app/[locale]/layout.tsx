@@ -48,7 +48,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   // setRequestLocale MUTLAKA getMessages'tan önce
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
 
   const messages = await getMessages();
 

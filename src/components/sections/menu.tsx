@@ -149,7 +149,7 @@ function CategorySection({ category }: { category: MenuCategory }) {
           {category.label}
         </h2>
         <div className="flex-1 h-px bg-white/5" />
-        <span className="text-xs text-zinc-600">{t("item_count", { count: category.items.length })}</span>
+        <span className="text-xs text-zinc-600">{t("item_count", { count: String(category.items.length) })}</span>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
