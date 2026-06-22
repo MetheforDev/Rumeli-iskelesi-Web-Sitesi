@@ -22,14 +22,21 @@ HENÜZ KURULU DEĞİL: three / @react-three/fiber / @react-three/drei (3D milest
 
 ## Mevcut Klasör Yapısı (yeniden yaratma, mevcudu kullan)
 src/
-├── app/            → layout, page, globals.css, manifest, sitemap, favicon
+├── app/[locale]/   → layout, page (next-intl route segmenti), manifest, sitemap
+├── i18n/           → routing.ts, request.ts (next-intl yapılandırması)
 ├── components/
 │   ├── sections/   → navbar, hero, info-bar, featured, menu, reviews, gallery, footer
+│   ├── seo/        → RestaurantJsonLd
 │   └── ui/         → sparkles, text-reveal, card-hover, parallax, moving-border,
-│                     lightbox, sticky-actions, announcement-bar
-└── lib/utils.ts    → cn() helper
-İLERİDE EKLENECEK (gerektiğinde): src/hooks/, src/context/,
-src/components/three/, src/components/seo/, src/lib/menu.ts, src/lib/site-config.ts
+│                     lightbox, sticky-actions, announcement-bar, fade-in-view,
+│                     section-glow, scroll-progress, weather-widget
+└── lib/
+    ├── utils.ts        → cn() helper
+    ├── site-config.ts  → NAP — işletme bilgisi tek kaynağı
+    ├── menu-data.ts     → menuData — menü verisi tek kaynağı, getMenuItem(id)
+    ├── colors.ts       → BRAND_HEX — CSS dışı (canvas/manifest/meta) bağlamlar için
+    └── seo.ts          → generateSeoMetadata()
+İLERİDE EKLENECEK (gerektiğinde): src/hooks/, src/context/, src/components/three/
 
 ## Komutlar
 - Geliştirme: npm run dev
@@ -45,7 +52,17 @@ mevcut bir bileşen varsa onu kullan/genişlet, kopyasını yaratma.
 - Performans bütçesi: mobilde Lighthouse 90+. useMemo/useCallback, lazy load,
   next/image (AVIF/WebP). Gereksiz 'use client' kullanma.
 - RSC varsayılan: bileşenler Server Component'tir; sadece etkileşim/hook/
-  browser API gerekirse 'use client' ekle.
+  browser API gerekirse 'use client' ekle. Sadece scroll-reveal animasyonu
+  için client'a geçme — `FadeInView` (src/components/ui/fade-in-view.tsx)
+  kullan, asıl içerik Server Component'te kalsın (örnek: footer.tsx,
+  reviews.tsx — `getTranslations` ile server-side çeviri).
+  **Kasıtlı istisnalar** (gerçek interaktif state/hook nedeniyle client
+  kalması gerekenler — yeni bölüm eklerken bu listeyi kontrol et, "diğerleri
+  de client" diye kopyalama): `hero.tsx` (slideshow state/timer, scroll
+  parallax), `navbar.tsx` (mobil menü state, scroll-spy IntersectionObserver,
+  dil seçici routing), `info-bar.tsx` (canlı saat/açık-kapalı hesaplaması),
+  `menu.tsx` (kategori tab state), `featured.tsx`/`gallery.tsx` (drag
+  carousel / lightbox state).
 - Mevcut klasör mimarisini koru; dosyaları doğru yere koy.
 
 ## Çekirdek Mimari Prensip (EN ÖNEMLİ KURAL)
@@ -63,6 +80,19 @@ Efektler/3D asla ilk boyamayı, etkileşimi veya SEO'yu bloklamaz.
 - PostCSS eklentisi: @tailwindcss/postcss.
 - Sınıf birleştirme her zaman cn() (clsx + tailwind-merge) ile yapılır.
 - Bileşen varyantları cva ile tanımlanır.
+
+## i18n Kuralları (next-intl, 4 dil: tr/en/bg/el)
+- `messages/{tr,en,bg,el}.json` — yeni bir çeviri key'i eklerken **4 dosyanın
+  hepsine** eklenmeli. `npm run build` öncesi `prebuild` script'i
+  (`check:locales`) bunu otomatik doğrular; key eksikse build kırılır.
+- `messages/tr.d.json.ts` next.config.ts'teki next-intl plugin tarafından
+  otomatik üretilir (gitignored, elle düzenleme), `global.d.ts`'teki
+  `AppConfig.Messages` augmentasyonu sayesinde `t("yanlış-key")` derleme
+  zamanında hata verir. ICU placeholder'lara (`{h}`, `{count}` vb.) sayı
+  geçirirken `String(...)` ile sarmalamak gerekir (literal tipli mesaj
+  bildirimi yüzünden next-intl bunları `string` bekliyor).
+- Yeni bir görsel yolu eklerken `prebuild`'in `check:images` script'i
+  `public/` altında karşılığı olmayan yolları yakalar (build kırılır).
 
 ## Animasyon Kuralları
 - Tüm animasyonlar framer-motion ile (paket adı framer-motion, import
