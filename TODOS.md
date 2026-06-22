@@ -33,18 +33,18 @@ kapsam olarak işaretlenen işleri toplar.
       mühendislik incelemesi bunu tek kişilik bir proje için orantısız/riskli
       buldu (üçüncü parti, sürümlenmemiş bir GitHub deposuna sert bağımlılık).
       Kullanıcı kararı: gerekirse `./setup --no-team` ile geri alınabilir.
-- [ ] **RSC ihlali** — CLAUDE.md "Server Component varsayılan" diyor ama tüm
-      section bileşenleri `"use client"`. Çoğu sadece `useInView` fade-in
-      animasyonu için client — bu tek bir `<FadeInView>` wrapper'a çekilip
-      asıl içerik server component'te kalabilir.
-- [ ] **Locale key parity güvenliği yok** — 4 dilin `messages/*.json` key
-      seti şu an birebir ama bunu zorlayan tip kontrolü (`global.d.ts` ile
-      next-intl `IntlMessages` augmentasyonu) veya build-time script yok.
-      Gelecekte sadece tr.json'a key eklenirse diğer 3 dilde sessizce
-      "MISSING_MESSAGE" hatası oluşur.
-- [ ] **Menü/galeri görsel yolu doğrulaması yok** — `menuData`/`HERO_IMAGES`
-      içindeki string görsel yolları `public/` ile eşleşip eşleşmediği
-      build-time kontrol edilmiyor; yazım hatası sessizce kırık görsel üretir.
+- [x] **RSC ihlali** — `FadeInView` wrapper eklendi; `footer.tsx` ve
+      `reviews.tsx` artık tam Server Component (`getTranslations` ile
+      server-side çeviri). Diğer bölümler (hero/navbar/info-bar/menu/
+      featured/gallery) gerçek interaktif state nedeniyle kasıtlı olarak
+      client kaldı — istisna listesi CLAUDE.md'ye eklendi. Çözüldü.
+- [x] **Locale key parity güvenliği yok** — `global.d.ts` ile next-intl
+      `AppConfig.Messages` augmentasyonu (yanlış `t()` key'i derleme zamanı
+      hatası verir) + `scripts/check-locales.mjs` (4 dilin key seti farklıysa
+      `prebuild`'de build'i kırar) eklendi. Çözüldü.
+- [x] **Menü/galeri görsel yolu doğrulaması yok** — `scripts/check-image-paths.mjs`
+      tüm `/images/...` referanslarını `public/` ile karşılaştırıp `prebuild`'de
+      doğruluyor. Çözüldü.
 - [ ] **Bilgi hiyerarşisi** — Hero → InfoBar → Featured → Menu → Reviews →
       Gallery → Footer sırası, "şu an açık mı + ne yiyeyim + nasıl giderim"
       arayan acil mobil ziyaretçi için harita/yol tarifini 7 bölüm sona
