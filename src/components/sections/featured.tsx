@@ -6,6 +6,7 @@ import Image from "next/image";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { useTranslations } from "next-intl";
 import { SectionGlow } from "@/components/ui/section-glow";
+import { getMenuItem } from "@/lib/menu-data";
 
 type FeaturedItem = {
   name: string;
@@ -16,56 +17,28 @@ type FeaturedItem = {
   emoji: string;
 };
 
-const featuredItems: FeaturedItem[] = [
-  {
-    name: "Tekirdağ Köftesi",
-    desc: "Tekirdağ'ın meşhur köftesi, közlenmiş sebze ve salatalarla",
-    price: "350",
-    image: "/images/menu/tekirdag-koftesi.jpg",
-    tag: "En Çok Satan",
-    emoji: "🥩",
-  },
-  {
-    name: "Kahvaltı Tabağı",
-    desc: "Zengin kahvaltı tabağı, taze malzemelerle hazırlanır",
-    price: "300",
-    image: "/images/menu/Kahvaltı tabağı.jpg",
-    tag: "Sabah Favori",
-    emoji: "🍳",
-  },
-  {
-    name: "Hamburger",
-    desc: "El yapımı köfte, taze sebzeler ve özel sos ile",
-    price: "250",
-    image: "/images/menu/hamburger-1.jpg",
-    tag: "Favori",
-    emoji: "🍔",
-  },
-  {
-    name: "San Sebastian",
-    desc: "Premium tatlımız — ekstra çikolata sos ile servis edilir",
-    price: "200",
-    image: "/images/menu/San Sebastian ai.jpg",
-    tag: "Premium",
-    emoji: "🍮",
-  },
-  {
-    name: "Çift Kaşarlı Tost",
-    desc: "İki kat kaşar peyniri, çıtır ekmek",
-    price: "150",
-    image: "/images/menu/cift-kasarli-tost.jpg",
-    tag: "Hızlı & Lezzetli",
-    emoji: "🥪",
-  },
-  {
-    name: "Patates Kızartması",
-    desc: "Taze yağda çıtır patates, tek porsiyon",
-    price: "100",
-    image: "/images/menu/patates.png",
-    tag: "Yan Lezzet",
-    emoji: "🍟",
-  },
+// İsim/fiyat/görsel menuData'dan (tek kaynak) gelir — burada sadece
+// vitrin için özel pazarlama metni (desc), rozet (tag) ve emoji tutulur.
+const FEATURED_REFS: { id: string; desc: string; tag: string; emoji: string }[] = [
+  { id: "tekirdag-koftesi", desc: "Tekirdağ'ın meşhur köftesi, közlenmiş sebze ve salatalarla", tag: "En Çok Satan", emoji: "🥩" },
+  { id: "kahvalti-tabagi", desc: "Zengin kahvaltı tabağı, taze malzemelerle hazırlanır", tag: "Sabah Favori", emoji: "🍳" },
+  { id: "hamburger", desc: "El yapımı köfte, taze sebzeler ve özel sos ile", tag: "Favori", emoji: "🍔" },
+  { id: "san-sebastian", desc: "Premium tatlımız — ekstra çikolata sos ile servis edilir", tag: "Premium", emoji: "🍮" },
+  { id: "cift-kasarli-tost", desc: "İki kat kaşar peyniri, çıtır ekmek", tag: "Hızlı & Lezzetli", emoji: "🥪" },
+  { id: "patates-kizartmasi", desc: "Taze yağda çıtır patates, tek porsiyon", tag: "Yan Lezzet", emoji: "🍟" },
 ];
+
+const featuredItems: FeaturedItem[] = FEATURED_REFS.map((ref) => {
+  const menuItem = getMenuItem(ref.id);
+  return {
+    name: menuItem.name,
+    price: menuItem.price ?? "",
+    image: menuItem.image ?? menuItem.images?.[0] ?? "",
+    desc: ref.desc,
+    tag: ref.tag,
+    emoji: ref.emoji,
+  };
+});
 
 function FeaturedCard({ item, index }: { item: FeaturedItem; index: number }) {
   const [hovered, setHovered] = useState(false);

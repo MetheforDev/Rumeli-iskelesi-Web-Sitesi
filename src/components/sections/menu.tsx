@@ -8,120 +8,9 @@ import { HoverCard } from "@/components/ui/card-hover";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { useTranslations } from "next-intl";
 import { SectionGlow } from "@/components/ui/section-glow";
+import { menuData, type MenuItem, type MenuCategory } from "@/lib/menu-data";
 
 const SITE_URL = "https://en.mutlukentmenu.com/qrmenu";
-
-type MenuItem = {
-  name: string;
-  price?: string;
-  description?: string;
-  badge?: string;
-  allergens?: string;
-  image?: string;
-  images?: string[];
-};
-
-type MenuCategory = {
-  id: string;
-  label: string;
-  emoji: string;
-  items: MenuItem[];
-};
-
-const menuData: MenuCategory[] = [
-  {
-    id: "kahvalti",
-    label: "Kahvaltı",
-    emoji: "🍳",
-    items: [
-      { name: "Kahvaltı Tabağı", price: "300", image: "/images/menu/Kahvaltı tabağı.jpg" },
-      { name: "Sucuklu Yumurta", price: "150" },
-      { name: "Sahanda Yumurta", price: "100" },
-      { name: "Menemen", price: "150" },
-    ],
-  },
-  {
-    id: "kofte",
-    label: "Tekirdağ Köftesi",
-    emoji: "🥩",
-    items: [
-      { name: "Tekirdağ Köftesi", price: "350", image: "/images/menu/tekirdag-koftesi.jpg" },
-      { name: "Çoban Salata", price: "120" },
-      { name: "Çoban Salata Double", price: "180" },
-      { name: "Piyaz", price: "120" },
-      { name: "Piyaz Double", price: "180" },
-    ],
-  },
-  {
-    id: "fastfood",
-    label: "Fast Food",
-    emoji: "🍔",
-    items: [
-      { name: "Hamburger", price: "250", images: ["/images/menu/hamburger-1.jpg", "/images/menu/hamburger-2.jpg"] },
-      { name: "Cheeseburger", price: "275" },
-      { name: "Kalem Böreği", price: "130" },
-      { name: "Kaşarlı Tost", price: "120" },
-      { name: "Çift Kaşarlı Tost", price: "150", image: "/images/menu/cift-kasarli-tost.jpg" },
-      { name: "Kaşarlı Tost Tabağı", price: "150", description: "Domates, salatalık ve zeytin ile servis edilir" },
-      { name: "Karışık Tost", price: "150" },
-      { name: "Karışık Tost Tabağı", price: "180" },
-      { name: "Kombo Mix", price: "200" },
-      { name: "Soğuk Sandviç", description: "Beyaz peynirli veya kaşarlı", image: "/images/menu/soguk-sandvic.png" },
-      { name: "Patates Kızartması", price: "100", description: "Tek porsiyon", image: "/images/menu/patates.png" },
-      { name: "Sosisli", price: "100", image: "/images/menu/sosisli.jpg" },
-    ],
-  },
-  {
-    id: "sicak",
-    label: "Sıcak İçecekler",
-    emoji: "☕",
-    items: [
-      { name: "Çay", price: "15", image: "/images/menu/Çay ai.jpg" },
-      { name: "Double Çay", price: "30", image: "/images/menu/Çay Double.jpg" },
-      { name: "Türk Kahvesi", price: "75", image: "/images/menu/Türk Kahvesi.jpg" },
-      { name: "Türk Kahvesi Double", price: "100", image: "/images/menu/Türk kahvesi Double.jpg" },
-      { name: "Oralet Çeşitleri", price: "15" },
-      { name: "Adaçayı", price: "30" },
-      { name: "Demleme Ihlamur", price: "100" },
-      { name: "Salep", badge: "seasonal_badge" },
-    ],
-  },
-  {
-    id: "soguk",
-    label: "Soğuk İçecekler",
-    emoji: "🥤",
-    items: [
-      { name: "Ayran", price: "50", image: "/images/menu/ayran-ozgullu.jpg" },
-      { name: "Limonata", price: "80", image: "/images/menu/limonata-dokme.jpg" },
-      { name: "Soğuk Kahve Çeşitleri", price: "100", description: "El yapımı çeşitleri", image: "/images/menu/soguk-nescafe.jpg" },
-      { name: "Nescafe Express Çeşitleri", price: "100", images: ["/images/menu/nescafe-express-orjinal.jpg", "/images/menu/nescafe-express-vanilla.jpg"] },
-      { name: "Üzüm Suyu", price: "80", description: "Katkısız", image: "/images/menu/uzum-suyu-suleymanpasa.jpg" },
-      { name: "Meyveli Soda", price: "40", images: ["/images/menu/karpuz-cilek-soda-ozkaynak.jpg", "/images/menu/elmali-soda-ozkaynak.jpg", "/images/menu/limonlu-soda-ozkaynak.jpg"] },
-      { name: "Sade Soda", price: "30", image: "/images/menu/sade-soda-ozkaynak.jpg" },
-      { name: "Fuse Tea Çeşitleri", price: "65", description: "Karpuz · Limon · Mango · Şeftali", images: ["/images/menu/fuse-tea-karpuz.jpg", "/images/menu/fuse-tea-limon.jpg", "/images/menu/fuse-tea-mango.jpg", "/images/menu/fuse-tea-seftali.jpg"] },
-      { name: "Cappy Meyve Suyu", price: "65", description: "Karışık · Kayısı · Vişne · Şeftali", images: ["/images/menu/cappy-karisik.jpg", "/images/menu/cappy-kayisi.jpg", "/images/menu/cappy-visne.jpg", "/images/menu/cappy-seftali.jpg"] },
-      { name: "Cam İçecekler", price: "50", image: "/images/menu/coca-cola-cam-sise.jpg" },
-      { name: "Kutu İçecekler", price: "65", description: "Coca Cola · Zero · Fanta · Sprite", images: ["/images/menu/coca-cola-kutu.jpg", "/images/menu/coca-cola-kutu-zero.jpg", "/images/menu/fanta.jpg", "/images/menu/sprite-kutu.jpg"] },
-      { name: "0.50 Su", price: "15", image: "/images/menu/su-05-ozkaynak.jpg" },
-    ],
-  },
-  {
-    id: "tatlilar",
-    label: "Tatlılar",
-    emoji: "🍮",
-    items: [
-      { name: "San Sebastian", price: "200", badge: "Premium", description: "Ekstra çikolata sos ile servis edilir", allergens: "Süt · Yumurta · Gluten", image: "/images/menu/San Sebastian ai.jpg" },
-      { name: "Magnolya", price: "160", allergens: "Süt · Yer Fıstığı · Gluten · Yumurta", image: "/images/menu/Magnolya ai.jpg" },
-      { name: "Tiramisu", price: "160", allergens: "Süt · Yumurta · Gluten", image: "/images/menu/Tiramisu ai.jpg" },
-      { name: "Peynir Helvası", price: "160", allergens: "Süt · Gluten", image: "/images/menu/Peynir helvası ai.jpg" },
-      { name: "Cheesecake Çeşitleri", price: "160", allergens: "Süt · Yumurta · Gluten", image: "/images/menu/Limonlu cheescake ai.jpg" },
-      { name: "Truff", price: "160", allergens: "Süt · Yer Fıstığı · Gluten · Yumurta" },
-      { name: "İbiza", price: "160", allergens: "Süt · Gluten" },
-      { name: "Trileçe", price: "160", allergens: "Süt · Yumurta · Gluten" },
-      { name: "Mozaik", price: "160", allergens: "Süt · Gluten" },
-    ],
-  },
-];
 
 function MenuCardWithImage({ item, index }: { item: MenuItem; index: number }) {
   const t = useTranslations("menu");
@@ -267,9 +156,9 @@ function CategorySection({ category }: { category: MenuCategory }) {
         {category.items.map((item, i) => {
           const hasImage = !!(item.image || item.images?.length);
           return hasImage ? (
-            <MenuCardWithImage key={item.name} item={item} index={i} />
+            <MenuCardWithImage key={item.id} item={item} index={i} />
           ) : (
-            <MenuCardSimple key={item.name} item={item} index={i} />
+            <MenuCardSimple key={item.id} item={item} index={i} />
           );
         })}
       </div>
