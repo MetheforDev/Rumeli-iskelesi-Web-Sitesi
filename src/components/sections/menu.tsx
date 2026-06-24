@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 import { SectionGlow } from "@/components/ui/section-glow";
 import { menuData, type MenuItem, type MenuCategory } from "@/lib/menu-data";
 
-const SITE_URL = "https://en.mutlukentmenu.com/qrmenu";
+const SITE_URL = "https://mutlukentmenu.com/rumeliiskelesi";
 
 function MenuCardWithImage({ item, index }: { item: MenuItem; index: number }) {
   const t = useTranslations("menu");
@@ -135,22 +135,52 @@ function CategorySection({ category }: { category: MenuCategory }) {
 
   return (
     <div ref={ref} className="mb-14">
-      <motion.div
-        initial={{ opacity: 0, x: -10 }}
-        animate={isInView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.4 }}
-        className="flex items-center gap-3 mb-5"
-      >
-        <span className="text-2xl">{category.emoji}</span>
-        <h2
-          className="text-xl font-bold text-white"
-          style={{ fontFamily: "var(--font-playfair, Georgia, serif)" }}
+      {category.image ? (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.5 }}
+          className="relative h-36 sm:h-44 rounded-2xl overflow-hidden mb-5"
         >
-          {category.label}
-        </h2>
-        <div className="flex-1 h-px bg-white/5" />
-        <span className="text-xs text-zinc-600">{t("item_count", { count: String(category.items.length) })}</span>
-      </motion.div>
+          <Image
+            src={category.image}
+            alt={category.label}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, 768px"
+          />
+          <div className="absolute inset-0 bg-linear-to-t from-[#080808] via-black/20 to-transparent" />
+          <div className="absolute bottom-3 left-4 flex items-center gap-2">
+            <span className="text-2xl">{category.emoji}</span>
+            <h2
+              className="text-xl font-bold text-white"
+              style={{ fontFamily: "var(--font-playfair, Georgia, serif)", textShadow: "0 2px 12px rgba(0,0,0,0.8)" }}
+            >
+              {category.label}
+            </h2>
+          </div>
+          <span className="absolute bottom-3 right-4 text-xs text-zinc-300" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
+            {t("item_count", { count: String(category.items.length) })}
+          </span>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.4 }}
+          className="flex items-center gap-3 mb-5"
+        >
+          <span className="text-2xl">{category.emoji}</span>
+          <h2
+            className="text-xl font-bold text-white"
+            style={{ fontFamily: "var(--font-playfair, Georgia, serif)" }}
+          >
+            {category.label}
+          </h2>
+          <div className="flex-1 h-px bg-white/5" />
+          <span className="text-xs text-zinc-600">{t("item_count", { count: String(category.items.length) })}</span>
+        </motion.div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {category.items.map((item, i) => {
@@ -287,7 +317,7 @@ export function Menu() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-xs text-brand-400 hover:text-brand-300 transition-colors"
             >
-              mutlukentmenu.com/qrmenu
+              mutlukentmenu.com/rumeliiskelesi
             </a>
           </div>
         </motion.div>

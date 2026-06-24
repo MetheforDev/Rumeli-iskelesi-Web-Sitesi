@@ -13,6 +13,8 @@ export type MenuCategory = {
   id: string;
   label: string;
   emoji: string;
+  /** Kategori başlığının üstünde gösterilen, isteğe bağlı geniş banner görseli. */
+  image?: string;
   items: MenuItem[];
 };
 
@@ -57,7 +59,7 @@ export const menuData: MenuCategory[] = [
       { id: "karisik-tost", name: "Karışık Tost", price: "150" },
       { id: "karisik-tost-tabagi", name: "Karışık Tost Tabağı", price: "180" },
       { id: "kombo-mix", name: "Kombo Mix", price: "200" },
-      { id: "soguk-sandvic", name: "Soğuk Sandviç", description: "Beyaz peynirli veya kaşarlı", image: "/images/menu/soguk-sandvic.png" },
+      { id: "soguk-sandvic", name: "Soğuk Sandviç", price: "100", description: "Beyaz peynirli veya kaşarlı", image: "/images/menu/soguk-sandvic.png" },
       { id: "patates-kizartmasi", name: "Patates Kızartması", price: "100", description: "Tek porsiyon", image: "/images/menu/patates.png" },
       { id: "sosisli", name: "Sosisli", price: "100", image: "/images/menu/sosisli.jpg" },
     ],
@@ -65,7 +67,7 @@ export const menuData: MenuCategory[] = [
   {
     id: "sicak",
     label: "Sıcak İçecekler",
-    emoji: "☕",
+    emoji: "🍵",
     items: [
       { id: "cay", name: "Çay", price: "15", image: "/images/menu/Çay ai.jpg" },
       { id: "cay-double", name: "Double Çay", price: "30", image: "/images/menu/Çay Double.jpg" },
@@ -75,6 +77,22 @@ export const menuData: MenuCategory[] = [
       { id: "adacayi", name: "Adaçayı", price: "30" },
       { id: "demleme-ihlamur", name: "Demleme Ihlamur", price: "100" },
       { id: "salep", name: "Salep", badge: "seasonal_badge" },
+    ],
+  },
+  {
+    id: "kahveler",
+    label: "Kahveler",
+    emoji: "☕",
+    image: "/images/menu/Kahveler hero.png",
+    items: [
+      { id: "americano", name: "Americano", image: "/images/menu/Americano.png" },
+      { id: "espresso", name: "Espresso", image: "/images/menu/Espresso.png" },
+      { id: "double-espresso", name: "Double Espresso", image: "/images/menu/Double espresso.png" },
+      { id: "cappucino", name: "Cappucino", image: "/images/menu/Cappucino.png" },
+      { id: "vanilyali-cappucino", name: "Vanilyalı Cappucino", image: "/images/menu/Vanilyalı Cappucino.png" },
+      { id: "latte", name: "Latte", image: "/images/menu/Latte.png" },
+      { id: "mocha", name: "Mocha", image: "/images/menu/Mocha.png" },
+      { id: "sicak-cikolata", name: "Sıcak Çikolata", image: "/images/menu/Sıcak Çikolata.png" },
     ],
   },
   {
