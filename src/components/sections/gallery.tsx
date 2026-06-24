@@ -56,16 +56,8 @@ const galleryItems: GalleryItem[] = [
     type: "image",
     src: "/images/gallery/rumeli-cam.jpg",
     alt: "Rumeli İskelesi iç mekan",
-    span: "col-span-1 row-span-1",
+    span: "col-span-2 row-span-1",
     captionKey: "İç Mekan",
-  },
-  {
-    id: 6,
-    type: "image",
-    src: "/images/hero/rumeli-cam.jpg",
-    alt: "Rumeli İskelesi",
-    span: "col-span-1 row-span-1",
-    captionKey: "Rumeli İskelesi",
   },
 ];
 
