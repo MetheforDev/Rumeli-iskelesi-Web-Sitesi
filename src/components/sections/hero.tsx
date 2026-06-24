@@ -24,8 +24,13 @@ const HERO_IMAGES: HeroImage[] = [
 
 function MobilePromoPill() {
   const t = useTranslations("hero");
+  const reducedMotion = useReducedMotion();
   return (
-    <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-brand-500/30 bg-black/50 backdrop-blur-md shadow-lg">
+    <motion.div
+      animate={reducedMotion ? {} : { x: [-4, 4, -4] }}
+      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-brand-500/30 bg-black/50 backdrop-blur-md shadow-lg"
+    >
       <div className="flex items-center justify-center w-7 h-7 rounded-full bg-brand-600/30 border border-brand-500/30 shrink-0">
         <span className="text-sm">☕</span>
       </div>
@@ -48,14 +53,19 @@ function MobilePromoPill() {
         <span className="w-1 h-1 rounded-full bg-brand-400 animate-pulse" />
         <span className="text-brand-300 text-[10px] font-medium">{t("promo_badge")}</span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 function DesktopPromoCard() {
   const t = useTranslations("hero");
+  const reducedMotion = useReducedMotion();
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/55 backdrop-blur-xl shadow-2xl w-48">
+    <motion.div
+      animate={reducedMotion ? {} : { x: [-4, 4, -4] }}
+      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/55 backdrop-blur-xl shadow-2xl w-48"
+    >
       {/* Soğuk Nescafe görseli */}
       <div className="relative h-28 overflow-hidden">
         <Image
@@ -96,7 +106,7 @@ function DesktopPromoCard() {
         </p>
         <p className="text-zinc-500 text-[11px] mt-1 leading-snug">{t("promo_sub")}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
