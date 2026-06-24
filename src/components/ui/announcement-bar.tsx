@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
@@ -14,6 +14,7 @@ function getSeason(): "summer" | "winter" | "default" {
 export function AnnouncementBar() {
   const [visible, setVisible] = useState(true);
   const t = useTranslations("announcement");
+  const reducedMotion = useReducedMotion();
   const season = getSeason();
 
   const text = season === "summer" ? t("summer") : season === "winter" ? t("winter") : t("main");
@@ -26,11 +27,17 @@ export function AnnouncementBar() {
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="relative z-60 bg-brand-600 text-white overflow-hidden"
+          className="relative bg-brand-600 text-white overflow-hidden"
         >
           <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-3 text-xs sm:text-sm">
             <span className="animate-pulse text-brand-200">✦</span>
-            <span className="font-medium tracking-wide">{text}</span>
+            <motion.span
+              animate={reducedMotion ? {} : { x: [-4, 4, -4] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="font-medium tracking-wide"
+            >
+              {text}
+            </motion.span>
             <span className="animate-pulse text-brand-200">✦</span>
             <button
               onClick={() => setVisible(false)}

@@ -19,8 +19,13 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   return (
     <>
       <ScrollProgress />
-      <AnnouncementBar />
-      <Navbar />
+      {/* AnnouncementBar + Navbar aynı fixed kapsayıcıda: Navbar kendi başına
+          fixed top-0 olsaydı, AnnouncementBar'ın değişken yüksekliğini
+          (açık/kapalı) hesaba katmadan üstüne biner, menü isimlerini kapatırdı. */}
+      <div className="fixed top-0 inset-x-0 z-50">
+        <AnnouncementBar />
+        <Navbar />
+      </div>
       {/* pb-20 = mobile sticky bar için alan */}
       <main className="pb-20 md:pb-0">
         <Hero />
