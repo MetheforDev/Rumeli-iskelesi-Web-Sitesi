@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { QRCodeSVG } from "qrcode.react";
 import { HoverCard } from "@/components/ui/card-hover";
@@ -18,6 +18,14 @@ function MenuCardWithImage({ item, index }: { item: MenuItem; index: number }) {
   const isInView = useInView(ref, { once: true, margin: "-40px" });
   const [imgIdx, setImgIdx] = useState(0);
   const allImages = item.images ?? (item.image ? [item.image] : []);
+
+  useEffect(() => {
+    if (allImages.length <= 1) return;
+    const interval = setInterval(() => {
+      setImgIdx((prev) => (prev + 1) % allImages.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [allImages.length]);
 
   return (
     <motion.div

@@ -73,7 +73,7 @@ export const menuData: MenuCategory[] = [
       { id: "cay-double", name: "Double Çay", price: "30", image: "/images/menu/Çay Double.jpg" },
       { id: "turk-kahvesi", name: "Türk Kahvesi", price: "75", image: "/images/menu/Türk Kahvesi.jpg" },
       { id: "turk-kahvesi-double", name: "Türk Kahvesi Double", price: "100", image: "/images/menu/Türk kahvesi Double.jpg" },
-      { id: "oralet-cesitleri", name: "Oralet Çeşitleri", price: "15" },
+      { id: "oralet-cesitleri", name: "Oralet Çeşitleri", price: "15", description: "Kivi · Portakal · Karadut · Kuşburnu · Elma · Nane Limon" },
       { id: "adacayi", name: "Adaçayı", price: "30" },
       { id: "demleme-ihlamur", name: "Demleme Ihlamur", price: "100" },
       { id: "salep", name: "Salep", badge: "seasonal_badge" },
