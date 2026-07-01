@@ -121,7 +121,7 @@ export async function Reviews() {
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <FadeInView duration={0.3} y={0} className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-brand-600/30 text-brand-400 text-xs tracking-widest uppercase">
+          <FadeInView duration={0.3} y={0} className="text-brand-400 text-sm font-medium mb-4 block">
             {t("badge")}
           </FadeInView>
           <TextReveal text={t("title1")} className="justify-center text-3xl sm:text-4xl font-bold text-white mb-3" />

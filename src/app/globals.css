@@ -40,7 +40,7 @@
   body {
     background: #0a0a0a;
     color: #fafafa;
-    font-family: var(--font-inter, system-ui, sans-serif);
+    font-family: var(--font-body, system-ui, sans-serif);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -70,13 +70,8 @@
 }
 
 @layer utilities {
-  .text-gradient {
-    background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-gold), var(--color-brand-500));
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 4s linear infinite;
+  .font-display {
+    font-family: var(--font-display, system-ui, sans-serif);
   }
 
   .glass {
@@ -97,11 +92,6 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
-  }
-
-  @keyframes shimmer {
-    0% { background-position: 0% center; }
-    100% { background-position: 200% center; }
   }
 
   @keyframes fadeUp {

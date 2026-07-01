@@ -151,13 +151,13 @@ export function Gallery() {
 
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <motion.div
+          <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-brand-600/30 text-brand-400 text-xs tracking-widest uppercase"
+            className="text-brand-400 text-sm font-medium mb-4"
           >
             {t("badge")}
-          </motion.div>
+          </motion.p>
           <TextReveal
             text={t("title1")}
             className="justify-center text-4xl md:text-5xl font-bold text-white mb-2"

@@ -29,7 +29,7 @@ export function StickyActions() {
         </svg>
       ),
       href: "https://instagram.com/mutlukent.sosyal",
-      color: "bg-linear-to-br from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400",
+      color: "bg-rose-600 hover:bg-rose-500",
     },
     {
       label: t("menu"),

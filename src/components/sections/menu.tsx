@@ -161,8 +161,8 @@ function CategorySection({ category }: { category: MenuCategory }) {
           <div className="absolute bottom-3 left-4 flex items-center gap-2">
             <span className="text-2xl">{category.emoji}</span>
             <h2
-              className="text-xl font-bold text-white"
-              style={{ fontFamily: "var(--font-playfair, Georgia, serif)", textShadow: "0 2px 12px rgba(0,0,0,0.8)" }}
+              className="font-display text-xl font-bold text-white"
+              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.8)" }}
             >
               {category.label}
             </h2>
@@ -179,10 +179,7 @@ function CategorySection({ category }: { category: MenuCategory }) {
           className="flex items-center gap-3 mb-5"
         >
           <span className="text-2xl">{category.emoji}</span>
-          <h2
-            className="text-xl font-bold text-white"
-            style={{ fontFamily: "var(--font-playfair, Georgia, serif)" }}
-          >
+          <h2 className="font-display text-xl font-bold text-white">
             {category.label}
           </h2>
           <div className="flex-1 h-px bg-white/5" />
@@ -226,13 +223,13 @@ export function Menu() {
 
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
-          <motion.div
+          <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-brand-600/30 text-brand-400 text-xs tracking-widest uppercase"
+            className="text-brand-400 text-sm font-medium mb-4"
           >
             {t("badge")}
-          </motion.div>
+          </motion.p>
           <TextReveal
             text={t("title")}
             className="justify-center text-4xl md:text-5xl font-bold text-white"

@@ -100,13 +100,13 @@ export function Featured() {
       <div className="max-w-6xl mx-auto px-6 mb-10">
         <div className="flex items-end justify-between">
           <div>
-            <motion.div
+            <motion.p
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
-              className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full border border-brand-600/30 text-brand-400 text-xs tracking-widest uppercase"
+              className="text-brand-400 text-sm font-medium mb-3"
             >
               {t("badge")}
-            </motion.div>
+            </motion.p>
             <TextReveal
               text={t("title")}
               className="text-2xl sm:text-3xl font-bold text-white"

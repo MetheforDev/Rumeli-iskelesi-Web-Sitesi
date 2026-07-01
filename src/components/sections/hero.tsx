@@ -247,10 +247,10 @@ export function Hero() {
       >
         {/* Location badge */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="inline-flex items-center gap-2 mb-6 sm:mb-8 px-4 py-1.5 rounded-full border border-brand-600/40 bg-black/40 backdrop-blur-sm text-brand-300 text-xs tracking-widest uppercase"
+          className="inline-flex items-center gap-2 mb-6 sm:mb-8 text-brand-300/80 text-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse" />
           {t("badge")}
@@ -261,8 +261,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-5xl sm:text-6xl md:text-8xl font-bold leading-none tracking-tight mb-5"
-          style={{ fontFamily: "var(--font-playfair, Georgia, serif)" }}
+          className="font-display text-5xl sm:text-6xl md:text-8xl font-black leading-none tracking-tight mb-5"
         >
           <span className="block text-white" style={{ textShadow: "0 4px 24px rgba(0,0,0,0.9)" }}>
             {t("title1")}
@@ -270,13 +269,8 @@ export function Hero() {
           <span
             className="block"
             style={{
-              background: "linear-gradient(135deg, var(--color-brand-500), var(--color-brand-gold), var(--color-brand-500))",
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              animation: "shimmer 4s linear infinite",
-              filter: "drop-shadow(0 4px 16px rgba(217,137,42,0.4))",
+              color: "var(--color-brand-gold)",
+              filter: "drop-shadow(0 4px 16px rgba(244,197,106,0.35))",
             }}
           >
             {t("title2")}

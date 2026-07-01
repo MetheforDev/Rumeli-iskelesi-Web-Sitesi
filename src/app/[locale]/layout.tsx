@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Barlow_Semi_Condensed, Mulish } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -10,14 +10,16 @@ import type { Locale } from "@/lib/site-config";
 import { BRAND_HEX } from "@/lib/colors";
 import "../globals.css";
 
-const inter = Inter({
-  subsets: ["latin", "cyrillic", "greek"],
-  variable: "--font-inter",
+const displayFont = Barlow_Semi_Condensed({
+  subsets: ["latin"],
+  weight: ["600", "700", "800", "900"],
+  variable: "--font-display",
   display: "swap",
 });
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
+
+const bodyFont = Mulish({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -53,7 +55,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
+    <html lang={locale} className={`${bodyFont.variable} ${displayFont.variable}`}>
       <head>
         <RestaurantJsonLd locale={locale as Locale} />
         <meta name="theme-color" content={BRAND_HEX.primary} />
