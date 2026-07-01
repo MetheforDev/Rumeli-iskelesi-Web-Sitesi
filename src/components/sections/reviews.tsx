@@ -83,6 +83,8 @@ function ReviewCard({
     <FadeInView
       delay={index * 0.08}
       margin="-40px"
+      y={0}
+      blur
       className="flex flex-col gap-3 p-5 rounded-2xl bg-white/6 border border-white/10 hover:border-brand-600/30 transition-colors"
     >
       <div className="flex items-center justify-between">
@@ -116,7 +118,7 @@ export async function Reviews() {
   const googleReviewLabel = t("google_review");
 
   return (
-    <section className="py-24 px-6 bg-[#0a0a0a] relative overflow-hidden">
+    <section className="section-py px-6 bg-[#0a0a0a] relative overflow-hidden">
       <SectionGlow color="gold" position="top-center" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
       <div className="max-w-6xl mx-auto">
@@ -124,8 +126,8 @@ export async function Reviews() {
           <FadeInView duration={0.3} y={0} className="text-brand-400 text-sm font-medium mb-4 block">
             {t("badge")}
           </FadeInView>
-          <TextReveal text={t("title1")} className="justify-center text-3xl sm:text-4xl font-bold text-white mb-3" />
-          <TextReveal text={t("title2")} delay={0.2} className="justify-center text-3xl sm:text-4xl font-bold" />
+          <TextReveal text={t("title1")} className="font-display justify-center text-3xl sm:text-4xl font-bold text-white mb-3" />
+          <TextReveal text={t("title2")} delay={0.2} className="font-display justify-center text-3xl sm:text-4xl font-bold" />
 
           <FadeInView
             delay={0.5}

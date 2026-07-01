@@ -14,8 +14,9 @@ export function FadeInView({
   children,
   className,
   delay = 0,
-  duration = 0.5,
+  duration = 0.55,
   y = 20,
+  blur = false,
   once = true,
   margin = "-60px",
 }: {
@@ -24,6 +25,7 @@ export function FadeInView({
   delay?: number;
   duration?: number;
   y?: number;
+  blur?: boolean;
   once?: boolean;
   margin?: `${number}px`;
 }) {
@@ -33,9 +35,13 @@ export function FadeInView({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration, delay }}
+      initial={{ opacity: 0, y, ...(blur ? { filter: "blur(8px)" } : {}) }}
+      animate={
+        isInView
+          ? { opacity: 1, y: 0, ...(blur ? { filter: "blur(0px)" } : {}) }
+          : {}
+      }
+      transition={{ duration, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       {children}

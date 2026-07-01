@@ -32,7 +32,7 @@ function MenuCardWithImage({ item, index }: { item: MenuItem; index: number }) {
       ref={ref}
       initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.45, delay: index * 0.05, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.55, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
       className="md:col-span-2"
     >
       <HoverCard className="overflow-hidden">
@@ -101,7 +101,7 @@ function MenuCardSimple({ item, index }: { item: MenuItem; index: number }) {
       ref={ref}
       initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.45, delay: index * 0.05, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.55, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
     >
       <HoverCard className="p-4 h-full">
         <div className="flex items-start justify-between gap-3">
@@ -216,7 +216,7 @@ export function Menu() {
     activeTab === "tumu" ? menuData : menuData.filter((c) => c.id === activeTab);
 
   return (
-    <section id="menu" ref={sectionRef} className="py-32 px-6 bg-[#080808] relative overflow-hidden">
+    <section id="menu" ref={sectionRef} className="section-py px-6 bg-[#080808] relative overflow-hidden">
       <SectionGlow color="amber" position="top-left" />
       <SectionGlow color="teal" position="bottom-right" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/30 to-transparent" />
@@ -232,7 +232,7 @@ export function Menu() {
           </motion.p>
           <TextReveal
             text={t("title")}
-            className="justify-center text-4xl md:text-5xl font-bold text-white"
+            className="font-display justify-center text-4xl md:text-5xl font-bold text-white"
           />
           <motion.p
             initial={{ opacity: 0 }}

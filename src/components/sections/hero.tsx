@@ -39,12 +39,7 @@ function MobilePromoPill() {
         <span className="w-px h-3 bg-white/20" />
         <span
           className="font-black"
-          style={{
-            background: "linear-gradient(135deg, var(--color-brand-500), var(--color-brand-gold))",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
+          style={{ color: "var(--color-brand-gold)" }}
         >
           {t("promo_price")}
         </span>
@@ -95,12 +90,7 @@ function DesktopPromoCard() {
         <p className="text-white font-bold text-sm leading-snug">{t("promo_title")}</p>
         <p
           className="font-black text-xl leading-tight mt-0.5"
-          style={{
-            background: "linear-gradient(135deg, var(--color-brand-500), var(--color-brand-gold))",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
+          style={{ color: "var(--color-brand-gold)" }}
         >
           {t("promo_price")}
         </p>
@@ -249,7 +239,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="inline-flex items-center gap-2 mb-6 sm:mb-8 text-brand-300/80 text-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse" />
@@ -258,10 +248,10 @@ export function Hero() {
 
         {/* Title */}
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 48 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-display text-5xl sm:text-6xl md:text-8xl font-black leading-none tracking-tight mb-5"
+          transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="text-display mb-5"
         >
           <span className="block text-white" style={{ textShadow: "0 4px 24px rgba(0,0,0,0.9)" }}>
             {t("title1")}
@@ -281,7 +271,7 @@ export function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-zinc-200 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-6"
           style={{ textShadow: "0 2px 16px rgba(0,0,0,0.9)" }}
         >

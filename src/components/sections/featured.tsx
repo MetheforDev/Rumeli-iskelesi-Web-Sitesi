@@ -93,7 +93,7 @@ export function Featured() {
   const t = useTranslations("featured");
 
   return (
-    <section ref={sectionRef} className="py-20 bg-[#080808] relative overflow-hidden">
+    <section ref={sectionRef} className="section-py bg-[#080808] relative overflow-hidden">
       <SectionGlow color="amber" position="top-left" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
 
@@ -109,7 +109,7 @@ export function Featured() {
             </motion.p>
             <TextReveal
               text={t("title")}
-              className="text-2xl sm:text-3xl font-bold text-white"
+              className="font-display text-2xl sm:text-3xl font-bold text-white"
             />
           </div>
           <motion.a

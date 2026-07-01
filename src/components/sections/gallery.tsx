@@ -145,7 +145,7 @@ export function Gallery() {
   const imageItems = galleryItems.filter((i) => i.type === "image");
 
   return (
-    <section id="gallery" ref={sectionRef} className="py-32 px-6 bg-[#050505] relative overflow-hidden">
+    <section id="gallery" ref={sectionRef} className="section-py px-6 bg-[#050505] relative overflow-hidden">
       <SectionGlow color="teal" position="bottom-left" />
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
 
@@ -160,12 +160,12 @@ export function Gallery() {
           </motion.p>
           <TextReveal
             text={t("title1")}
-            className="justify-center text-4xl md:text-5xl font-bold text-white mb-2"
+            className="font-display justify-center text-4xl md:text-5xl font-bold text-white mb-2"
           />
           <TextReveal
             text={t("title2")}
             delay={0.2}
-            className="justify-center text-4xl md:text-5xl font-bold"
+            className="font-display justify-center text-4xl md:text-5xl font-bold"
           />
         </div>
 
