@@ -219,7 +219,13 @@ export function Menu() {
     <section id="menu" ref={sectionRef} className="section-py px-6 bg-[#080808] relative overflow-hidden">
       <SectionGlow color="amber" position="top-left" />
       <SectionGlow color="teal" position="bottom-right" />
-      <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/30 to-transparent" />
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+        style={{ transformOrigin: "center" }}
+        className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/30 to-transparent"
+      />
 
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
@@ -245,9 +251,9 @@ export function Menu() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3 }}
+          initial={{ opacity: 0, x: -24 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap justify-center gap-2 mb-12"
         >
           {categoryTabs.map((tab) => {

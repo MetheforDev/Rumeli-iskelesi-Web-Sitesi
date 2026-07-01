@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useReducedMotion, type MotionValue } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { TextReveal } from "@/components/ui/text-reveal";
@@ -65,10 +65,12 @@ function GalleryCard({
   item,
   index,
   onClick,
+  parallaxY,
 }: {
   item: GalleryItem;
   index: number;
   onClick: () => void;
+  parallaxY?: MotionValue<string>;
 }) {
   const t = useTranslations("gallery");
   const [hovered, setHovered] = useState(false);
@@ -80,7 +82,7 @@ function GalleryCard({
       ref={ref}
       initial={{ opacity: 0, scale: 0.95 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       className={`relative overflow-hidden rounded-2xl cursor-pointer bg-zinc-900 ${item.span}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -98,6 +100,20 @@ function GalleryCard({
         >
           <source src={item.src} type="video/mp4" />
         </video>
+      ) : parallaxY ? (
+        <motion.div
+          className="absolute inset-[-12%] pointer-events-none"
+          style={{ y: parallaxY }}
+        >
+          <Image
+            src={item.src}
+            alt={item.alt}
+            fill
+            className="object-cover transition-transform duration-700"
+            style={{ transform: hovered ? "scale(1.06)" : "scale(1)" }}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </motion.div>
       ) : (
         <Image
           src={item.src}
@@ -143,17 +159,34 @@ export function Gallery() {
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
   const t = useTranslations("gallery");
   const imageItems = galleryItems.filter((i) => i.type === "image");
+  const reducedMotion = useReducedMotion();
+  const { scrollYProgress: galleryScroll } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const droneY = useTransform(
+    galleryScroll,
+    [0, 1],
+    reducedMotion ? ["0%", "0%"] : ["-10%", "10%"]
+  );
 
   return (
     <section id="gallery" ref={sectionRef} className="section-py px-6 bg-[#050505] relative overflow-hidden">
       <SectionGlow color="teal" position="bottom-left" />
-      <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        style={{ transformOrigin: "right" }}
+        className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent"
+      />
 
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
+            initial={{ opacity: 0, x: -16 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="text-brand-400 text-sm font-medium mb-4"
           >
             {t("badge")}
@@ -175,6 +208,7 @@ export function Gallery() {
               key={item.id}
               item={item}
               index={i}
+              parallaxY={i === 0 ? droneY : undefined}
               onClick={() =>
                 item.type === "image" &&
                 setLightboxIdx(imageItems.findIndex((img) => img.id === item.id))

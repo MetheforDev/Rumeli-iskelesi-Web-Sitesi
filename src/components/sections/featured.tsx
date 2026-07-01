@@ -95,14 +95,21 @@ export function Featured() {
   return (
     <section ref={sectionRef} className="section-py bg-[#080808] relative overflow-hidden">
       <SectionGlow color="amber" position="top-left" />
-      <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent" />
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        style={{ transformOrigin: "left" }}
+        className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-brand-600/20 to-transparent"
+      />
 
       <div className="max-w-6xl mx-auto px-6 mb-10">
         <div className="flex items-end justify-between">
           <div>
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
+              initial={{ opacity: 0, x: -16 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="text-brand-400 text-sm font-medium mb-3"
             >
               {t("badge")}

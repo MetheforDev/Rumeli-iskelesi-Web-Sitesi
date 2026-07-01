@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { BRAND_HEX } from "@/lib/colors";
 
@@ -11,10 +11,21 @@ export function HoverCard({
   children: React.ReactNode;
   className?: string;
 }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const torchBg = useMotionTemplate`radial-gradient(180px at ${mouseX}px ${mouseY}px, rgba(212,137,42,0.10), transparent 80%)`;
+
+  function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  }
+
   return (
     <motion.div
-      whileHover={{ y: -8, scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      onMouseMove={onMouseMove}
+      whileHover={{ y: -6, scale: 1.015 }}
+      transition={{ type: "spring", stiffness: 340, damping: 24 }}
       className={cn(
         "group relative overflow-hidden rounded-2xl bg-zinc-900/90 backdrop-blur-sm",
         "border border-white/10 shadow-lg hover:shadow-brand-500/20 hover:border-brand-500/30",
@@ -22,8 +33,11 @@ export function HoverCard({
         className
       )}
     >
-      <div className="absolute inset-0 bg-linear-to-br from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      {children}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+        style={{ background: torchBg }}
+      />
+      <div className="relative z-10">{children}</div>
     </motion.div>
   );
 }
