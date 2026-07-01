@@ -12,6 +12,7 @@ const withNextIntl = createNextIntlPlugin({
 });
 
 const nextConfig: NextConfig = {
+  transpilePackages: ["lenis"],
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
