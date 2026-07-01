@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { WeatherWidget } from "@/components/ui/weather-widget";
+import { TextReveal } from "@/components/ui/text-reveal";
 import { useTranslations } from "next-intl";
 import { BRAND_HEX } from "@/lib/colors";
 
@@ -247,14 +248,9 @@ export function Hero() {
         </motion.div>
 
         {/* Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 48 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="text-display mb-5"
-        >
-          <span className="block text-white" style={{ textShadow: "0 4px 24px rgba(0,0,0,0.9)" }}>
-            {t("title1")}
+        <h1 className="text-display mb-5">
+          <span className="block" style={{ textShadow: "0 4px 24px rgba(0,0,0,0.9)" }}>
+            <TextReveal text={t("title1")} delay={0.3} className="justify-center text-white" />
           </span>
           <span
             className="block"
@@ -263,9 +259,9 @@ export function Hero() {
               filter: "drop-shadow(0 4px 16px rgba(244,197,106,0.35))",
             }}
           >
-            {t("title2")}
+            <TextReveal text={t("title2")} delay={0.52} className="justify-center" />
           </span>
-        </motion.h1>
+        </h1>
 
         {/* Subtitle */}
         <motion.p

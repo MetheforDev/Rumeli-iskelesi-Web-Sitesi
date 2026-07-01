@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { generateSeoMetadata } from "@/lib/seo";
 import { RestaurantJsonLd } from "@/components/seo/RestaurantJsonLd";
+import { SmoothScroll } from "@/components/ui/smooth-scroll";
 import type { Locale } from "@/lib/site-config";
 import { BRAND_HEX } from "@/lib/colors";
 import "../globals.css";
@@ -67,6 +68,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <link rel="icon" type="image/png" href="/images/logo/rumeli-logo-transparent.png" />
       </head>
       <body className="antialiased">
+        <SmoothScroll />
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
