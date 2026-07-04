@@ -28,7 +28,7 @@ export const menuData: MenuCategory[] = [
     emoji: "🍳",
     items: [
       { id: "kahvalti-tabagi", name: "Kahvaltı Tabağı", price: "300", image: "/images/menu/Kahvaltı tabağı.jpg" },
-      { id: "sucuklu-yumurta", name: "Sucuklu Yumurta", price: "150" },
+      { id: "sucuklu-yumurta", name: "Sucuklu Yumurta", price: "150", image: "/images/menu/Sucuklu Yumurta.png" },
       { id: "sahanda-yumurta", name: "Sahanda Yumurta", price: "100" },
       { id: "menemen", name: "Menemen", price: "150" },
     ],
@@ -101,7 +101,7 @@ export const menuData: MenuCategory[] = [
     emoji: "🥤",
     items: [
       { id: "ayran", name: "Ayran", price: "50", image: "/images/menu/ayran-ozgullu.jpg" },
-      { id: "limonata", name: "Limonata", price: "80", image: "/images/menu/limonata-dokme.jpg" },
+      { id: "limonata", name: "Limonata", price: "80", image: "/images/menu/Limonata ai.png" },
       { id: "soguk-kahve-cesitleri", name: "Soğuk Kahve Çeşitleri", price: "100", description: "El yapımı çeşitleri", image: "/images/menu/soguk-nescafe.jpg" },
       { id: "nescafe-express-cesitleri", name: "Nescafe Express Çeşitleri", price: "100", images: ["/images/menu/nescafe-express-orjinal.jpg", "/images/menu/nescafe-express-vanilla.jpg"] },
       { id: "uzum-suyu", name: "Üzüm Suyu", price: "80", description: "Katkısız", image: "/images/menu/uzum-suyu-suleymanpasa.jpg" },
@@ -125,9 +125,9 @@ export const menuData: MenuCategory[] = [
       { id: "peynir-helvasi", name: "Peynir Helvası", price: "160", allergens: "Süt · Gluten", image: "/images/menu/Peynir helvası ai.jpg" },
       { id: "cheesecake-cesitleri", name: "Cheesecake Çeşitleri", price: "160", allergens: "Süt · Yumurta · Gluten", image: "/images/menu/Limonlu cheescake ai.jpg" },
       { id: "truff", name: "Truff", price: "160", allergens: "Süt · Yer Fıstığı · Gluten · Yumurta" },
-      { id: "ibiza", name: "İbiza", price: "160", allergens: "Süt · Gluten" },
+      { id: "ibiza", name: "İbiza", price: "160", allergens: "Süt · Gluten", image: "/images/menu/İbiza ai.jpg" },
       { id: "trilece", name: "Trileçe", price: "160", allergens: "Süt · Yumurta · Gluten" },
-      { id: "mozaik", name: "Mozaik", price: "160", allergens: "Süt · Gluten" },
+      { id: "mozaik", name: "Mozaik", price: "160", allergens: "Süt · Gluten", image: "/images/menu/Mozaik ai.png" },
     ],
   },
 ];
