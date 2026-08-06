@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Barlow_Semi_Condensed, Mulish } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -10,6 +10,14 @@ import { SmoothScroll } from "@/components/ui/smooth-scroll";
 import type { Locale } from "@/lib/site-config";
 import { BRAND_HEX } from "@/lib/colors";
 import "../globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: BRAND_HEX.primary,
+  colorScheme: "dark",
+};
 
 const displayFont = Barlow_Semi_Condensed({
   subsets: ["latin"],
@@ -59,11 +67,9 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} className={`${bodyFont.variable} ${displayFont.variable}`}>
       <head>
         <RestaurantJsonLd locale={locale as Locale} />
-        <meta name="theme-color" content={BRAND_HEX.primary} />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Rumeli İskelesi" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link rel="apple-touch-icon" href="/images/logo/rumeli-logo-transparent.png" />
         <link rel="icon" type="image/png" href="/images/logo/rumeli-logo-transparent.png" />
       </head>

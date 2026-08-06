@@ -1,4 +1,13 @@
-export const SITE_URL = "https://rumeli-iskelesi-web-sitesi.vercel.app";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
+/** Canonical production origin. Set NEXT_PUBLIC_SITE_URL when a custom domain is connected. */
+export const SITE_URL = (configuredSiteUrl || "https://rumeli-iskelesi-web-sitesi.vercel.app").replace(
+  /\/$/,
+  ""
+);
+
+/** Vercel preview deployments must never compete with the canonical production site. */
+export const IS_INDEXABLE = process.env.VERCEL_ENV !== "preview";
 
 export const LOCALES = ["tr", "en", "bg", "el"] as const;
 export type Locale = (typeof LOCALES)[number];
@@ -30,4 +39,5 @@ export const NAP = {
   // Google işletme profili — Maps paylaşım linki
   googleMapsUrl: "https://maps.app.goo.gl/HTfFUhUDxG3fNHWv9",
   heroImage: "/images/hero/rumeli-cam.jpg",
+  logo: "/images/logo/rumeli-logo-transparent.png",
 } as const;
